@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import videojs from 'video.js';
-import { Config } from '../../config/config';
+import { AppSettings } from '../../providers/app-settings';
 import { Api } from '../../providers/api';
 
 @Component({
@@ -10,7 +10,7 @@ import { Api } from '../../providers/api';
 export class VideojsVideoComponent {
     private static indexCounter = 1;
     constructor(
-        private config: Config,
+        private appSettings: AppSettings,
         private api: Api
     ) {
         this.id = 'video_' + VideojsVideoComponent.indexCounter++;
@@ -87,7 +87,7 @@ export class VideojsVideoComponent {
             }
         };
 
-        setInterval(this.progressIntervalHandler, this.config.saveMediaProgressInterval);
+        setInterval(this.progressIntervalHandler, this.appSettings.saveMediaProgressInterval);
     }
 
     stopTrackProgress() {

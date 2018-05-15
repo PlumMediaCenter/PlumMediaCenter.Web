@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { NavController } from "ionic-angular";
 import { Api } from "../../providers/api";
 import { Alerter } from "../../providers/alerter";
-import { Config } from "../../config/config";
+import { AppSettings } from "../../providers/app-settings";
 import { MediaItemHistoryRecord } from "../../interfaces/media-item-history-record";
 import { Loader } from "../../providers/loader";
 
@@ -14,7 +14,7 @@ export class HistoryPage {
     constructor(
         public navCtrl: NavController,
         public api: Api,
-        public config: Config,
+        public appSettings: AppSettings,
         private alerter: Alerter,
         private loader: Loader
     ) {
@@ -23,7 +23,7 @@ export class HistoryPage {
 
     ionViewDidLoad() {
         this.index = 0;
-        this.posterFolderUrl = `${this.config.apiUrl}/posters/`;
+        this.posterFolderUrl = `${this.appSettings.apiUrl}/posters/`;
         this.size = 50;
         this.historyRecords = [];
         //load the first page of info

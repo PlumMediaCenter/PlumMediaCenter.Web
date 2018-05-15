@@ -1,9 +1,7 @@
-import { Config } from '../config/local';
-//import { Config } from '../config/pi3';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { HttpClientModule } from 'ngx-http-client';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -14,7 +12,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { MovieCardComponent } from '../components/movie-card/movie-card';
 import { Api } from '../providers/api';
 import { Http2Factory } from '../providers/http2-factory';
-import { HttpModule } from '@angular/http';
 import { MovieInfoClick } from '../directives/movie-info-click';
 import { MovieInfoPage } from '../pages/movie-info/movie-info';
 import { MovieMetadataPage } from '../pages/movie-metadata/movie-metadata';
@@ -34,7 +31,6 @@ import { SaveIconComponent } from '../components/save-icon/save-icon';
 import { Alerter } from '../providers/alerter';
 import { Loader } from '../providers/loader';
 import { Toaster } from '../providers/toaster';
-import { Config as BaseConfig } from '../config/config';
 import { InstallDatabasePage } from '../pages/install-database/install-database';
 import { InitializePage } from '../pages/initialize/initialize';
 import { Util } from '../providers/util';
@@ -48,6 +44,7 @@ import { DeviceSizeIfDirective } from '../directives/device-size-if';
 import { MediaInfoClick } from '../directives/media-info-click';
 import { SearchResultsPage } from '../pages/search-results/search-results';
 import { SearchInputComponent } from '../components/search-input/search-input';
+import { AppSettings } from '../providers/app-settings';
 
 @NgModule({
     declarations: [
@@ -93,7 +90,7 @@ import { SearchInputComponent } from '../components/search-input/search-input';
     imports: [
         BrowserModule,
         FormsModule,
-        HttpModule,
+        HttpClientModule,
         IonicModule.forRoot(MyApp),
     ],
     bootstrap: [IonicApp],
@@ -113,15 +110,15 @@ import { SearchInputComponent } from '../components/search-input/search-input';
     ],
     providers: [
         Api,
+        Alerter,
+        AppSettings,
         Http2Factory,
+        Loader,
         StatusBar,
         SplashScreen,
-        Alerter,
-        Loader,
         Toaster,
         Util,
-        { provide: ErrorHandler, useClass: IonicErrorHandler },
-        { provide: BaseConfig, useClass: Config }
+        { provide: ErrorHandler, useClass: IonicErrorHandler }
     ]
 })
 export class AppModule { }

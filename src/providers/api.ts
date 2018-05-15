@@ -1,6 +1,6 @@
 import { Http2, Http2Factory } from './http2-factory';
 import { Injectable } from '@angular/core';
-import { Config } from '../config/config';
+import { AppSettings } from './app-settings';
 import { Movie } from '../interfaces/movie';
 import { MovieMetadataComparison, MovieMetadata } from '../interfaces/movie-metadata-comparison';
 import { MovieMetadataSearchResult } from '../interfaces/movie-metadata-search-result';
@@ -12,8 +12,8 @@ import { MediaItemHistoryRecord } from '../interfaces/media-item-history-record'
 
 @Injectable()
 export class Api {
-    constructor(http2Factory: Http2Factory, config: Config) {
-        this.http2 = http2Factory.create(config.apiUrl);
+    constructor(http2Factory: Http2Factory, appSettings: AppSettings) {
+        this.http2 = http2Factory.create(appSettings.apiUrl);
     }
     private http2: Http2;
 

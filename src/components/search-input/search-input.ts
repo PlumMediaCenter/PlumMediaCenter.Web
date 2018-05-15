@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NavController, NavControllerBase, MenuController } from 'ionic-angular';
+import { NavControllerBase, MenuController } from 'ionic-angular';
 import { SearchResultsPage } from '../../pages/search-results/search-results';
 
 @Component({
