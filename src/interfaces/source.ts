@@ -1,9 +1,9 @@
-import { MediaTypeId } from "../enums/media-type-id";
+import { MediaType } from "./media-type";
 
 export interface Source {
     id: number;
     folderPath: string;
-    mediaTypeId: MediaTypeId;
+    mediaType: MediaType;
 }
 
 

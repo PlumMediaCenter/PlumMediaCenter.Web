@@ -2,7 +2,7 @@ import { Directive, Input, HostListener } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MovieInfoPage } from '../pages/movie-info/movie-info';
 import { Api } from '../providers/api';
-import { MediaTypeId } from '../enums/media-type-id';
+import { MediaType } from '../interfaces/media-type';
 import { Loader } from '../providers/loader';
 
 @Directive({ selector: '[mediaInfoClick]' })
@@ -27,8 +27,8 @@ export class MediaInfoClick {
         try {
             var mediaItem = await this.api.mediaItems.getMediaItem(this.mediaItemId);
 
-            switch (mediaItem.mediaTypeId) {
-                case MediaTypeId.movie:
+            switch (mediaItem.mediaType) {
+                case 'Movie':
                     this.navCtrl.push(MovieInfoPage, { movieId: this.mediaItemId });
                     break;
                 default:

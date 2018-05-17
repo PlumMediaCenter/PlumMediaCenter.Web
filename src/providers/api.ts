@@ -12,14 +12,33 @@ import { MediaItemHistoryRecord } from '../interfaces/media-item-history-record'
 
 @Injectable()
 export class Api {
-    constructor(http2Factory: Http2Factory, appSettings: AppSettings) {
+    constructor(
+        http2Factory: Http2Factory,
+        appSettings: AppSettings
+    ) {
         this.http2 = http2Factory.create(appSettings.apiUrl);
     }
     private http2: Http2;
 
     public movies = {
         getAll: async () => {
-            return await this.http2.get<Movie[]>('api/movies');
+            return await this.http2.graphqlRequest<Movie[]>(`{
+                movies{
+                    id
+                    mediaType
+                    title
+                    sourceId
+                    summary
+                    description
+                    runtimeSeconds
+                    rating
+                    releaseDate
+                    tmdbId
+                    posterUrl
+                    backdropUrls
+                    videoUrl
+                }
+            }`, null, 'GET', 'movies');
         },
         getById: async (movieId: number) => {
             return await this.http2.get<Movie>(`api/movies/${movieId}`)
@@ -41,14 +60,6 @@ export class Api {
          */
         save: async (movieId: number, metadata: MovieMetadata) => {
             return await this.http2.post(`api/metadata/movies/${movieId}`, metadata);
-        }
-    }
-    public mediaTypes = {
-        /**
-         * Get a list of all possible media types
-         */
-        getAll: async () => {
-            return await this.http2.get<MediaType[]>('api/mediaTypes');
         }
     }
 
@@ -126,7 +137,15 @@ export class Api {
 
     public sources = {
         getAll: async () => {
-            return await this.http2.get<Source[]>('api/sources');
+            return await this.http2.graphqlRequest<Source[]>(`
+                {
+                    sources {
+                        id
+                        mediaType
+                        folderPath
+                    }
+                }
+            `, null, 'GET', 'sources');
         },
 
         /**

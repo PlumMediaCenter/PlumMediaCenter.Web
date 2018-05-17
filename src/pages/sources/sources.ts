@@ -5,7 +5,7 @@ import { Alerter } from '../../providers/alerter';
 import { Loader } from '../../providers/loader';
 import { Toaster } from '../../providers/toaster';
 import { AdminPage } from '../admin/admin';
-import { MediaType } from '../../interfaces/media-type';
+import { MediaType, MediaTypeList } from '../../interfaces/media-type';
 import { Source } from '../../interfaces/source';
 
 @Component({
@@ -25,10 +25,10 @@ export class SourcesPage {
     }
     private async init() {
         this.sources = await this.api.sources.getAll();
-        this.mediaTypes = await this.api.mediaTypes.getAll();
     }
 
-    public mediaTypes: MediaType[];
+    public mediaTypes = MediaTypeList;
+
     public sources: Source[];
     
     public async save() {

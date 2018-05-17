@@ -1,8 +1,4 @@
-import { MediaTypeId } from "../enums/media-type-id";
-
-export interface MediaType {
-    id: MediaTypeId;
-    name: string;
-}
+export type MediaType = 'Movie' | 'TvShow' | 'TvEpisode';
+export let MediaTypeList: MediaType[] = ['Movie', 'TvShow', 'TvEpisode'];
 
 

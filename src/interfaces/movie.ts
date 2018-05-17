@@ -1,8 +1,8 @@
-import { MediaTypeId } from "../enums/media-type-id";
+import { MediaType } from "./media-type";
 
 export interface Movie {
     id: number;
-    mediaTypeId: MediaTypeId;
+    mediaType: MediaType;
     title: string;
     sourceId: number;
     summary: string;

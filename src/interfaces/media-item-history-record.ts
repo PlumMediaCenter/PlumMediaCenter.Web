@@ -1,7 +1,7 @@
-import { MediaTypeId } from "../enums/media-type-id";
+import { MediaType } from "../interfaces/media-type";
 
 export interface MediaItemHistoryRecord {
-    mediaTypeId: MediaTypeId;
+    mediaType: MediaType;
     posterUrl: string;
     title: string;
     runtimeSeconds: number;
