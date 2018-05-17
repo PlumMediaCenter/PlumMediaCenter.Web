@@ -28,7 +28,7 @@ export class MediaInfoClick {
             var mediaItem = await this.api.mediaItems.getMediaItem(this.mediaItemId);
 
             switch (mediaItem.mediaType) {
-                case 'Movie':
+                case 'MOVIE':
                     this.navCtrl.push(MovieInfoPage, { movieId: this.mediaItemId });
                     break;
                 default:

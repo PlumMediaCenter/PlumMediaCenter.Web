@@ -138,7 +138,7 @@ export class Api {
     public sources = {
         getAll: async () => {
             return await this.http2.graphqlRequest<Source[]>(`
-                {
+                query GetAllSources {
                     sources {
                         id
                         mediaType
@@ -152,7 +152,15 @@ export class Api {
          * Save this list as the full list of sources
          */
         setAll: async (sources: Source[]) => {
-            return await this.http2.post('api/sources', sources);
+            return await this.http2.graphqlRequest(`
+                mutation SetAllSources($sources: [SourceInput]!){
+                    sources: setAllSources(sources: $sources){
+                        id
+                        mediaType
+                        folderPath
+                    }
+                }
+            `, { sources }, 'PUT', 'sources');
         }
     }
 

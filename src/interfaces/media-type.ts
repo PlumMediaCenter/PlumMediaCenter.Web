@@ -1,4 +1,2 @@
-export type MediaType = 'Movie' | 'TvShow' | 'TvEpisode';
-export let MediaTypeList: MediaType[] = ['Movie', 'TvShow', 'TvEpisode'];
-
+export type MediaType = 'MOVIE' | 'TV_SHOW' | 'TV_EPISODE';
 

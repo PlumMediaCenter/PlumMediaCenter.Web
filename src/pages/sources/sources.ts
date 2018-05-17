@@ -5,7 +5,7 @@ import { Alerter } from '../../providers/alerter';
 import { Loader } from '../../providers/loader';
 import { Toaster } from '../../providers/toaster';
 import { AdminPage } from '../admin/admin';
-import { MediaType, MediaTypeList } from '../../interfaces/media-type';
+import { MediaType } from '../../interfaces/media-type';
 import { Source } from '../../interfaces/source';
 
 @Component({
@@ -27,10 +27,16 @@ export class SourcesPage {
         this.sources = await this.api.sources.getAll();
     }
 
-    public mediaTypes = MediaTypeList;
+    public mediaTypes: { title: string, value: MediaType }[] = [{
+        title: 'Movies',
+        value: 'MOVIE'
+    }, {
+        title: 'Tv Shows',
+        value: 'TV_SHOW'
+    }]
 
     public sources: Source[];
-    
+
     public async save() {
         var hideSave = () => { }, hideLibgen = () => { };
         try {
