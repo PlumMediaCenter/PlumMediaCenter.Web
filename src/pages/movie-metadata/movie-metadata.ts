@@ -4,6 +4,7 @@ import { Api } from '../../providers/api';
 import { Movie } from '../../interfaces/movie';
 import { MovieMetadataComparison } from '../../interfaces/movie-metadata-comparison';
 import { MovieMetadataSearchResult } from '../../interfaces/movie-metadata-search-result';
+import { Toaster } from '../../providers/toaster';
 
 @Component({
     selector: 'page-movie-metadata',
@@ -15,7 +16,8 @@ export class MovieMetadataPage {
         public navParams: NavParams,
         public api: Api,
         public loadingCtrl: LoadingController,
-        private alertCtrl: AlertController
+        private alertCtrl: AlertController,
+        private toaster: Toaster
     ) {
         this.init();
     }
@@ -134,6 +136,8 @@ export class MovieMetadataPage {
         loading.present();
         try {
             await this.api.metadata.save(this.movie.id, this.comparison.current);
+            this.toaster.toast('Metadata saved');
+            await this.navCtrl.pop();
         } catch (error) {
             let alert = this.alertCtrl.create({
                 title: 'Error',

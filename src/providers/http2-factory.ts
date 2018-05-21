@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { AppSettings } from './app-settings';
 
 @Injectable()
 export class Http2Factory {
     constructor(
-        private httpClient: HttpClient,
-        private appSettings: AppSettings
+        private httpClient: HttpClient
     ) {
 
     }
     public create(url: string) {
-        return new Http2(this.httpClient, this.appSettings, url);
+        return new Http2(this.httpClient, url);
     }
 }
 
@@ -20,7 +18,6 @@ export class Http2 {
     private rootUrl: string;
     constructor(
         private httpClient: HttpClient,
-        private appSettings: AppSettings,
         rootUrl: string = null
     ) {
         if (rootUrl.lastIndexOf('/') !== rootUrl.length - 1) {

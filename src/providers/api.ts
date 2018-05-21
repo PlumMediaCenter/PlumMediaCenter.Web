@@ -104,7 +104,11 @@ export class Api {
          * Save the movie metadata. This will completely replace all metadata items for this movie on disk
          */
         save: async (movieId: number, metadata: MovieMetadata) => {
-            return await this.http2.post(`api/metadata/movies/${movieId}`, metadata);
+            return this.http2.graphqlRequest(`
+                mutation SaveMovieMetadata($movieId: Int!, $metadata: MovieMetadataInput!) {
+                    saveMovieMetadata(movieId: $movieId, metadata: $metadata)
+                }
+            `, {movieId, metadata},'POST');
         }
     }
 
