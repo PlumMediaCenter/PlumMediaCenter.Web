@@ -1,12 +1,11 @@
 import { Http2, Http2Factory } from './http2-factory';
 import { Injectable } from '@angular/core';
 import { AppSettings } from './app-settings';
-import { Movie } from '../interfaces/movie';
+import { Movie, CardMovie } from '../interfaces/movie';
 import { MovieMetadataComparison, MovieMetadata } from '../interfaces/movie-metadata-comparison';
 import { MovieMetadataSearchResult } from '../interfaces/movie-metadata-search-result';
 import { LibraryGenerationStatus } from '../interfaces/library-generation-status';
 import { Source } from '../interfaces/source';
-import { MediaType } from '../interfaces/media-type';
 import { MediaProgress } from '../interfaces/media-progress';
 import { MediaItemHistoryRecord } from '../interfaces/media-item-history-record';
 
@@ -22,38 +21,84 @@ export class Api {
 
     public movies = {
         getAll: async () => {
-            return await this.http2.graphqlRequest<Movie[]>(`{
+            return await this.http2.graphqlRequest<CardMovie[]>(`{
                 movies{
                     id
-                    mediaType
-                    title
-                    sourceId
-                    summary
-                    description
-                    runtimeSeconds
-                    rating
-                    releaseDate
-                    tmdbId
                     posterUrl
-                    backdropUrls
-                    videoUrl
                 }
             }`, null, 'GET', 'movies');
         },
-        getById: async (movieId: number) => {
-            return await this.http2.get<Movie>(`api/movies/${movieId}`)
+        getById: async (id: number) => {
+            return await this.http2.graphqlRequest<Movie>(`
+                query GetMovieById($id: Int) {
+                    movies(ids: [$id]) {
+                        id
+                        mediaType
+                        title
+                        sourceId
+                        summary
+                        description
+                        runtimeSeconds
+                        rating
+                        releaseDate
+                        tmdbId
+                        posterUrl
+                        backdropUrls
+                        videoUrl
+                    }
+                }
+            `, { id }, 'GET', 'movies.0');
         }
     };
 
     public metadata = {
+        _movieMetadataFields: `
+            backdropUrls
+            collection
+            collectionOrder
+            completionSeconds
+            description
+            extraSearchText
+            genres
+            keywords
+            posterUrls
+            rating
+            releaseDate
+            runtimeSeconds
+            sortTitle
+            summary
+            title
+            tmdbId
+        `,
         compareMovie: async (movieId: number, tmdbId: number) => {
-            return await this.http2.get<MovieMetadataComparison>('api/metadata/movies/compare', { movieId, tmdbId });
+            return await this.http2.graphqlRequest<MovieMetadataComparison>(`
+                query getMovieMetadataComparison($movieId:Int!, $tmdbId: Int!) {
+                    movieMetadataComparison(movieId: $movieId, tmdbId: $tmdbId){
+                        incoming {
+                            ${this.metadata._movieMetadataFields}
+                        }
+                        current {
+                            ${this.metadata._movieMetadataFields}
+                        }
+                    }
+                }
+            `, { movieId, tmdbId }, 'GET', 'movieMetadataComparison');
         },
         /**
          * Get a list of search results from tmdb
          */
-        getMovieSearchResults: async (text: string) => {
-            return await this.http2.get<MovieMetadataSearchResult[]>('api/metadata/movies/search', { text });
+        getMovieSearchResults: async (searchText: string) => {
+            return await this.http2.graphqlRequest<MovieMetadataSearchResult[]>(`
+                query GetMovieMetadataSearchResults($searchText: String!) {
+                    movieMetadataSearchResults(searchText: $searchText) {
+                        title
+                        posterUrl
+                        tmdbId
+                        overview
+                        releaseDate
+                    }
+                }
+            `, { searchText }, 'GET', 'movieMetadataSearchResults');
         },
         /**
          * Save the movie metadata. This will completely replace all metadata items for this movie on disk
@@ -118,20 +163,51 @@ export class Api {
     }
 
     public library = {
+        _fields: `  
+            state
+            isProcessing
+            lastGeneratedDate
+            countTotal
+            countCompleted
+            countRemaining
+            secondsRemaining
+            activeFiles
+            mediaTypeCounts {
+                mediaType
+                total
+                completed
+                remaining
+            }
+        `,
         /**
          * Start the library generation process. The return 
          */
         generate: async () => {
-            return await this.http2.get<LibraryGenerationStatus>('api/library/generate');
+            return await this.http2.graphqlRequest<LibraryGenerationStatus>(`
+                mutation GenerateLibrary {
+                    libraryGeneratorStatus: generateLibrary {
+                        ${this.library._fields}
+                    }
+                }
+            `, null, 'GET', 'libraryGeneratorStatus');
         },
         getStatus: async () => {
-            return await this.http2.get<LibraryGenerationStatus>('api/library/status');
+            return await this.http2.graphqlRequest<LibraryGenerationStatus>(`
+            {
+                libraryGeneratorStatus {
+                  ${this.library._fields}
+                }
+            }`, null, 'GET', 'libraryGeneratorStatus');
         },
         /**
-         * Process an item by its media id. This can be any media type
+         * Process items by their ids. This can be any media type
          */
-        process: async (mediaItemId: number) => {
-            return await this.http2.post('api/library/processItem', null, { mediaItemId });
+        processItems: async (ids: number[]) => {
+            return await this.http2.graphqlRequest<LibraryGenerationStatus>(`
+                mutation ProcessItems($ids: [Int]!) {
+                    processItems(ids: $ids)
+                }
+        `, { ids }, 'GET', 'processItems');
         }
     }
 

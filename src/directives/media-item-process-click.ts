@@ -33,7 +33,7 @@ export class MediaItemProcessClick {
         }
         var hide = this.loader.show('Processing item');
         try {
-            await this.api.library.process(this._mediaId);
+            await this.api.library.processItems([this._mediaId]);
             hide();
             await this.alerter.alert('Processing finished');
         } catch (e) {

@@ -2,7 +2,6 @@ import { Directive, Input, HostListener } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { MovieInfoPage } from '../pages/movie-info/movie-info';
 import { Api } from '../providers/api';
-import { MediaType } from '../interfaces/media-type';
 import { Loader } from '../providers/loader';
 
 @Directive({ selector: '[mediaInfoClick]' })

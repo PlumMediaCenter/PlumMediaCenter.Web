@@ -17,4 +17,9 @@ export interface Movie {
     videoUrl: string;
 }
 
+export interface CardMovie {
+    id: number;
+    posterUrl: string;
+}
+
 

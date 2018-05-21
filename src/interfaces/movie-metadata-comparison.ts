@@ -3,22 +3,24 @@ export interface MovieMetadataComparison {
     current: MovieMetadata;
 }
 export interface MovieMetadata {
-    posterUrls: any[];
     backdropUrls: any[];
-    title: string;
-    titles: string[];
-    summary: string;
-    description: string;
     collection?: any;
     collectionOrder?: any;
-    cast: Cast[];
-    crew: Crew[];
+    completionSeconds: number;
+    description: string;
+    extraSearchText: string[];
     genres: string[];
     keywords: string[];
+    posterUrls: any[];
     rating: string;
     releaseDate: Date;
-    runtime: number;
+    runtimeSeconds: number;
+    sortTitle: string;
+    summary: string;
+    title: string;
     tmdbId: number;
+    cast: Cast[];
+    crew: Crew[];
 }
 
 export interface Cast {

@@ -15,6 +15,6 @@ export class MovieCardComponent {
     @Input("movie")
     public movie: Movie;
 
-    private epoch: number;
+    public epoch: number;
 
 }
