@@ -55,6 +55,7 @@ export class VideojsVideoComponent {
             poster: this.poster,
             autoplay: this.autoplay,
         }, () => {
+            //seek to the playback seconds specified
             if (this._seconds) {
                 this.player.currentTime(this._seconds);
             }
@@ -79,8 +80,9 @@ export class VideojsVideoComponent {
             if (currentTime !== previousTime) {
                 previousTime = currentTime;
                 try {
+                    var progressSeconds = Math.floor(this.player.currentTime());
                     //save the progress of this video
-                    await this.api.mediaItems.setProgress(this.mediaItemId, this.player.currentTime());
+                    await this.api.mediaItems.setProgress(this.mediaItemId, progressSeconds);
                 } catch (e) {
                     //do nothing with server errors...nothing we can do about it
                 }

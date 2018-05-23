@@ -28,7 +28,7 @@ export class MediaInfoClick {
 
             switch (mediaItem.mediaType) {
                 case 'MOVIE':
-                    this.navCtrl.push(MovieInfoPage, { movieId: this.mediaItemId });
+                    this.navCtrl.push(MovieInfoPage, { movieId: mediaItem.id });
                     break;
                 default:
                     throw new Error('Not implemented');

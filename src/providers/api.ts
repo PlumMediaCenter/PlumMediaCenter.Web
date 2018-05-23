@@ -6,7 +6,6 @@ import { MovieMetadataComparison, MovieMetadata } from '../interfaces/movie-meta
 import { MovieMetadataSearchResult } from '../interfaces/movie-metadata-search-result';
 import { LibraryGenerationStatus } from '../interfaces/library-generation-status';
 import { Source } from '../interfaces/source';
-import { MediaProgress } from '../interfaces/media-progress';
 import { MediaItemHistoryRecord } from '../interfaces/media-item-history-record';
 
 @Injectable()
@@ -35,10 +34,11 @@ export class Api {
                         id
                         mediaType
                         title
-                        sourceId
                         summary
+                        sourceId
                         description
                         runtimeSeconds
+                        resumeSeconds
                         rating
                         releaseDate
                         tmdbId
@@ -108,7 +108,7 @@ export class Api {
                 mutation SaveMovieMetadata($movieId: Int!, $metadata: MovieMetadataInput!) {
                     saveMovieMetadata(movieId: $movieId, metadata: $metadata)
                 }
-            `, {movieId, metadata},'POST');
+            `, { movieId, metadata }, 'POST');
         }
     }
 
@@ -117,15 +117,25 @@ export class Api {
          * Get history records for all media items
          */
         getAllHistory: async (limit?: number, index?: number) => {
-            return await this.http2.get<MediaItemHistoryRecord[]>('api/mediaItems/history', { index, limit });
+            return this.http2.graphqlRequest<MediaItemHistoryRecord[]>(`
+                query GetMediaHistory {
+                    mediaHistory {
+                        mediaType
+                        posterUrl
+                        title
+                        runtimeSeconds
+                        progressSecondsBegin
+                        progressSecondsEnd
+                        totalProgressSeconds
+                        id
+                        profileId
+                        mediaItemId
+                        dateBegin
+                        dateEnd
+                    }
+                }
+            `, { /*index, limit*/ }, 'GET', 'mediaHistory');
         },
-        /**
-         * Get history records for a single media item.
-         */
-        getHistory: async (mediaItemId: number, limit?: number, index?: number) => {
-            return await this.http2.get<MediaItemHistoryRecord[]>(`api/mediaItems/${mediaItemId}/history`);
-        },
-
         /**
          * Delete a history record by its id
          */
@@ -136,27 +146,26 @@ export class Api {
          * Set the current progress of a media item (i.e. the number of seconds into the item the user is)
          */
         setProgress: async (mediaItemId: number, seconds: number) => {
-            return await this.http2.post<MediaProgress>(`api/mediaItems/${mediaItemId}/progress`, { seconds });
-        },
-        /**
-         * Get the latest history record for the media item
-         */
-        getProgress: async (mediaItemId: number) => {
-            return this.mediaItems.getHistory(mediaItemId, 1);
+            return this.http2.graphqlRequest(`
+                mutation SetMediaItemProgress($mediaItemId: Int!, $seconds: Int!){
+                    setMediaItemProgress(mediaItemId: $mediaItemId, seconds: $seconds)
+                }
+            `, { mediaItemId, seconds }, 'POST');
         },
         /**
          * Get a media item by its id. Call this when you don't know what type of media id you have (movie, episode, etc...)
          */
         getMediaItem: async (mediaItemId: number) => {
-            return await this.http2.get<Movie>(`api/mediaItems/${mediaItemId}`);
-        },
-        /**
-         * Get the number of seconds that the item should resume at. Usually this is because the user stopped the mediaItem sometime before finishing it.
-         * Example: user stops movie, goes to bed. Starts to watch movie again in the morning. This method would let the player know the second
-         * to resume at.
-         */
-        getResumeSeconds: async (mediaItemId: number) => {
-            return await this.http2.get<number>(`api/mediaItems/${mediaItemId}/resumeSeconds`);
+            return await this.http2.graphqlRequest<Movie>(`
+                query GetMediaItem($mediaItemIds: [Int]!){
+                    mediaItems(mediaItemIds: $mediaItemIds){
+                        ...on Movie{
+                            id
+                            mediaType
+                        }
+                    }
+                }
+            `, { mediaItemIds: [mediaItemId] }, 'GET', 'mediaItems.0')
         },
         /**
          * Get a list of search results based on a search string

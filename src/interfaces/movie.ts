@@ -1,16 +1,14 @@
-import { MediaType } from "./media-type";
-
 export interface Movie {
     id: number;
-    mediaType: MediaType;
+    mediaType: 'MOVIE';
     title: string;
-    sourceId: number;
     summary: string;
+    sourceId: number;
     description: string;
-    duration: number;
+    runtimeSeconds: number;
+    resumeSeconds: number;
     rating?: string;
     releaseDate?: Date;
-    runtime: number;
     tmdbId?: number;
     posterUrl: string;
     backdropUrls: string[];

@@ -9,6 +9,6 @@
 
 <ion-content>
     <ng-container *ngIf="movie">
-        <videojs-video [mediaItemId]="movie.id" [url]="movie.videoUrl" [poster]="movie.backdropUrl" [autoplay]="true" [seconds]="resumeSeconds"></videojs-video>
+        <videojs-video [mediaItemId]="movie.id" [url]="movie.videoUrl" [poster]="movie.backdropUrls[0]" [autoplay]="true" [seconds]="movie.resumeSeconds"></videojs-video>
     </ng-container>
 </ion-content>

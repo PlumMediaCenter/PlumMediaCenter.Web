@@ -38,6 +38,6 @@ export class AppSettings {
     // public static googleClientApiKey = 'com.googleusercontent.apps.470698204130-t7jk4m1226k8k931kkta3eq4pqs3egts';
     public static googleClientApiKey = '470698204130-t7jk4m1226k8k931kkta3eq4pqs3egts.apps.googleusercontent.com';
 
-    public saveMediaProgressInterval = 10000;
+    public saveMediaProgressInterval = 2000;
 
 }

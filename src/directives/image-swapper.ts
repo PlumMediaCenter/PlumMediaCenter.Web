@@ -1,13 +1,31 @@
-import { Directive, Input, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Directive, Input, ElementRef, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import { NavController } from 'ionic-angular';
 
 @Directive({ selector: '[imageSwapper]' })
 export class ImageSwapperDirective implements OnDestroy, OnInit {
 
-    constructor(el: ElementRef) {
-        this.img = el.nativeElement;
+    constructor(
+        private el: ElementRef,
+        private viewContainerRef: ViewContainerRef,
+        private navCtrl: NavController
+    ) {
+        this.img = this.el.nativeElement;
     }
     private intervalHandle;
     private img: HTMLImageElement;
+
+    /**
+     * Determine if the parent view is currently visible
+     */
+    private get parentViewIsVisible() {
+        var parentComponent = (this.viewContainerRef as any)._view.component;
+        var activeComponent = this.navCtrl.getActive().instance;
+        if (parentComponent === activeComponent) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     private currentIndex = -1;
     private nextImage() {
@@ -23,7 +41,9 @@ export class ImageSwapperDirective implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this.intervalHandle = setInterval(() => {
-            this.nextImage();
+            if (this.parentViewIsVisible) {
+                this.nextImage();
+            }
         }, 5000);
         //run the first nextImage call so we get an image right away
         this.nextImage();
@@ -33,6 +53,7 @@ export class ImageSwapperDirective implements OnDestroy, OnInit {
     ngOnDestroy(): void {
         clearInterval(this.intervalHandle);
     }
+
 
     @Input("imageSwapper")
     public set urls(value: string[]) {

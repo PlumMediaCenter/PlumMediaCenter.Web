@@ -9,12 +9,13 @@ export class MoviePlayClick {
 
     }
 
+    private movie: Movie;
     private movieId: number;
 
     @Input("moviePlayClick")
     public set movieOrId(value: any) {
         if (typeof value === 'object') {
-            this.movieId = (value as Movie).id;
+            this.movie = value;
         } else {
             this.movieId = value;
         }
@@ -22,9 +23,9 @@ export class MoviePlayClick {
 
     @HostListener("click")
     click() {
-        if (!this.movieId) {
+        if (!this.movie && !this.movieId) {
             throw new Error("movieMetadataClick: value cannot be null or undefined");
         }
-        this.navCtrl.push(MoviePlayPage, { movieId: this.movieId })
+        this.navCtrl.push(MoviePlayPage, { movie: this.movie, movieId: this.movieId })
     }
 }

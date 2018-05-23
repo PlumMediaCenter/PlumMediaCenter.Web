@@ -1,14 +1,14 @@
 import { Directive, Input, HostListener } from '@angular/core';
 import { Api } from '../providers/api';
-import { Alerter } from '../providers/alerter';
 import { Loader } from '../providers/loader';
 import { NavController } from 'ionic-angular';
+import { Toaster } from '../providers/toaster';
 
 @Directive({ selector: '[mediaItemProcessClick]' })
 export class MediaItemProcessClick {
     constructor(
         private api: Api,
-        private alerter: Alerter,
+        private toaster: Toaster,
         private loader: Loader,
         public navController: NavController
     ) {
@@ -34,11 +34,11 @@ export class MediaItemProcessClick {
         var hide = this.loader.show('Processing item');
         try {
             await this.api.library.processItems([this._mediaId]);
-            hide();
-            await this.alerter.alert('Processing finished');
+            this.toaster.toast('Processing finished');
         } catch (e) {
+            this.toaster.toast('There was an error processing item: ' + (e as Error).message);
+        } finally {
             hide();
-            await this.alerter.alert('There was an error processing item: ' + (e as Error).message);
         }
         //try to refresh the current view
         var component = this.navController.getActive().instance;
