@@ -74,13 +74,13 @@ export class Http2 {
      * @param dataPath retrieves the data at the specified named path. For example "polls.0.serie.id" would get the serieId for the first poll in the result
      */
     public async graphqlRequest<T = any>(query: string, variables: any = {}, method: 'GET' | 'POST' | 'PUT' | 'DELETE' = 'GET', dataPath: string = null) {
-        let queryName: string;
         let type = query.trim().substring(0, 8).toLowerCase().indexOf('query') === 0 ? 'query' : 'mutation';
-        if (type === 'query') {
-            //find the query name from the query and use that in the querystring to help with debugging to distinguish this request
-            queryName = query.substring(query.indexOf('query') + 5, query.indexOf('{')).trim();
-        } else {
-            queryName = query.substring(query.indexOf('mutation') + 8, query.indexOf('(')).trim();
+        if (!method) {
+            method = 'GET';
+        }
+        var queryName = this.getQueryOrMutationName(query);
+        if (!queryName) {
+            queryName = `UNNAMED_${type.toUpperCase()}`;
         }
         //remove any excess whitespace from the query only for GET requests since this is passed on the URL
         if (method === 'GET') {
@@ -114,6 +114,17 @@ export class Http2 {
                 result = result[part];
             }
             return <T>result;
+        }
+    }
+
+    private getQueryOrMutationName(query: string) {
+        var regexp = /\s*(?:query|mutation)?\s*(\w*)?[\s\(\w\:|!\\$\[\]),]*\{\s*(\w*)/gi;
+        var match = regexp.exec(query);
+        if (match) {
+            //keep the first match, or the second match, or null if no matches were found to be not null
+            return match[1] || match[2] || null;
+        } else {
+            return null;
         }
     }
     private graphqlTrim(text: string) {

@@ -55,7 +55,7 @@ export class HistoryPage {
         try {
             if (await this.alerter.confirm('Are you sure you want to delete this history record')) {
                 hide = this.loader.show('Deleting history record');
-                await this.api.mediaItems.deleteHistoryById(record.id);
+                await this.api.mediaItems.deleteMediaHistoryRecord(record.id);
                 //remove the item from the list
                 this.historyRecords.splice(this.historyRecords.indexOf(record), 1);
             }

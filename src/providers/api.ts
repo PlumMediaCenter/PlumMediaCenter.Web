@@ -20,8 +20,10 @@ export class Api {
 
     public movies = {
         getAll: async () => {
-            return await this.http2.graphqlRequest<CardMovie[]>(`{
-                movies{
+            debugger;
+            return await this.http2.graphqlRequest<CardMovie[]>(`
+            {
+                movies {
                     id
                     posterUrl
                 }
@@ -105,7 +107,7 @@ export class Api {
          */
         save: async (movieId: number, metadata: MovieMetadata) => {
             return this.http2.graphqlRequest(`
-                mutation SaveMovieMetadata($movieId: Int!, $metadata: MovieMetadataInput!) {
+                mutation ($movieId: Int!, $metadata: MovieMetadataInput!) {
                     saveMovieMetadata(movieId: $movieId, metadata: $metadata)
                 }
             `, { movieId, metadata }, 'POST');
@@ -139,15 +141,19 @@ export class Api {
         /**
          * Delete a history record by its id
          */
-        deleteHistoryById: async (id: number) => {
-            return await this.http2.delete(`api/mediaItems/history/${id}`);
+        deleteMediaHistoryRecord: async (id: number) => {
+            return await this.http2.graphqlRequest(`
+                mutation ($id: Int!) {
+                    deleteMediaHistoryRecord(id: $id)
+                }
+            `, { id }, 'DELETE');
         },
         /**
          * Set the current progress of a media item (i.e. the number of seconds into the item the user is)
          */
         setProgress: async (mediaItemId: number, seconds: number) => {
             return this.http2.graphqlRequest(`
-                mutation SetMediaItemProgress($mediaItemId: Int!, $seconds: Int!){
+                mutation ($mediaItemId: Int!, $seconds: Int!){
                     setMediaItemProgress(mediaItemId: $mediaItemId, seconds: $seconds)
                 }
             `, { mediaItemId, seconds }, 'POST');
@@ -197,12 +203,12 @@ export class Api {
          */
         generate: async () => {
             return await this.http2.graphqlRequest<LibraryGenerationStatus>(`
-                mutation GenerateLibrary {
-                    libraryGeneratorStatus: generateLibrary {
+                mutation {
+                    generateLibrary {
                         ${this.library._fields}
                     }
                 }
-            `, null, 'GET', 'libraryGeneratorStatus');
+            `, null, 'GET', 'generateLibrary');
         },
         getStatus: async () => {
             return await this.http2.graphqlRequest<LibraryGenerationStatus>(`
@@ -217,7 +223,7 @@ export class Api {
          */
         processItems: async (ids: number[]) => {
             return await this.http2.graphqlRequest<LibraryGenerationStatus>(`
-                mutation ProcessItems($ids: [Int]!) {
+                mutation ($ids: [Int]!) {
                     processItems(ids: $ids)
                 }
         `, { ids }, 'GET', 'processItems');
@@ -242,7 +248,7 @@ export class Api {
          */
         setAll: async (sources: Source[]) => {
             return await this.http2.graphqlRequest(`
-                mutation SetAllSources($sources: [SourceInput]!){
+                mutation ($sources: [SourceInput]!){
                     sources: setAllSources(sources: $sources){
                         id
                         mediaType
@@ -258,13 +264,23 @@ export class Api {
          * Determine if the database is installed on the server
          */
         getIsInstalled: async () => {
-            return await this.http2.get<boolean>('api/database/isInstalled');
+            return await this.http2.graphqlRequest<any>(`
+                query {
+                    database {
+                        isInstalled
+                    }
+                }
+            `, undefined, undefined, 'database.isInstalled');
         },
         /**
          * Install the pmc database
          */
         install: async (rootUsername: string, rootPassword: string) => {
-            return await this.http2.post('api/database/install', { rootUsername, rootPassword });
+            return await this.http2.graphqlRequest(`
+                mutation ($rootUsername: String!, $rootPassword: String!){
+                    installDatabase(rootUsername: $rootUsername, rootPassword: $rootPassword)
+                }
+            `, { rootUsername, rootPassword }, 'POST');
         }
     }
 }
