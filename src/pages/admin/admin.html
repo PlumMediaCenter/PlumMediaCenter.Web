@@ -45,7 +45,7 @@
             </ng-container>
             <div style="color:red" *ngIf="libraryStatus?.error">
                 Library generation failed.
-                <br/> {{libraryStatus?.error.Message}}
+                <br/> {{libraryStatus?.error.message}}
             </div>
         </ion-card-content>
 
@@ -55,7 +55,7 @@
             <h1>Shared folders</h1>
         </ion-card-header>
         <ion-card-content>
-            <table *ngIf="sources">
+            <table class="shared-folders-table" *ngIf="sources">
                 <thead>
                     <tr>
                         <th>Type</th>
@@ -64,8 +64,8 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let source of sources">
-                        <td>{{source.sourceType}}</td>
-                        <td>{{source.folderPath}}</td>
+                        <td text-center>{{source.mediaType}}</td>
+                        <td text-left>{{source.folderPath}}</td>
                     </tr>
                 </tbody>
             </table>

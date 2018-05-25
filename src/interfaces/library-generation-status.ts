@@ -10,6 +10,10 @@ export interface LibraryGenerationStatus {
     secondsRemaining: number;
     activeFiles: string[];
     mediaTypeCounts: MediaTypeCount[];
+    error: {
+        message: string;
+        stackTrace: string[];
+    };
 }
 
 export interface MediaTypeCount {

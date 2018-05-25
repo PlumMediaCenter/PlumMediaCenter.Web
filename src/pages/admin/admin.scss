@@ -29,11 +29,15 @@ page-admin {
             }
         }
         tbody {
-            td,
-            {
-                padding: .75rem;
+            td {
+                padding: .6em;
                 vertical-align: top;
                 border-top: 1px solid #e9ecef;
+                border-right: 1px solid #e9ecef;
+                margin: 5px;
+            }
+            td:last-of-type {
+                border-right: none;
             }
         }
     }
