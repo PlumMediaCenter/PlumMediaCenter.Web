@@ -20,7 +20,6 @@ export class Api {
 
     public movies = {
         getAll: async () => {
-            debugger;
             return await this.http2.graphqlRequest<CardMovie[]>(`
             {
                 movies {
@@ -196,6 +195,10 @@ export class Api {
                 total
                 completed
                 remaining
+            }
+            error {
+                message
+                stackTrace
             }
         `,
         /**
