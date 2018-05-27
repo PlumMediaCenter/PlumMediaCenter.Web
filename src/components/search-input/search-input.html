@@ -1,1 +1,16 @@
-<ion-searchbar [(ngModel)]="searchText" [showCancelButton]="true" (ionInput)="search($event)" (ionCancel)="searchText = undefined"></ion-searchbar>
+<div>
+    <!-- <div class="searchbar-container">
+    </div>
+    <div class="search-button">
+    </div>
+
+  -->
+
+    <button ion-button class="search-button" (click)="search()">
+        <ion-icon name="arrow-round-forward"></ion-icon>
+    </button>
+    <div class="searchbar-container">
+        <ion-searchbar [(ngModel)]="searchText" (search)="search()" [showCancelButton]="false" (ionCancel)="searchText = undefined"></ion-searchbar>
+    </div>
+    <div clearfix></div>
+</div>

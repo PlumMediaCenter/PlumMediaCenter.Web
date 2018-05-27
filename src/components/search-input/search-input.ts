@@ -22,7 +22,7 @@ export class SearchInputComponent {
             this.nav.pop();
         }
         this.nav.push(SearchResultsPage, { searchText: this.searchText });
-        this.searchText = undefined;
+        this.searchText = '';
         this.menuCtrl.close();
     }
 }

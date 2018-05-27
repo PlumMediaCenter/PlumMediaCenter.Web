@@ -19,6 +19,10 @@
     display: inline-block;
 }
 
+[clearfix] {
+    clear: both;
+}
+
 .relative {
     position: relative;
 }
@@ -68,6 +72,15 @@ img.backdrop-card {
 
 *[text-right] {
     text-align: right;
+}
+
+//enforce a maximum page content size
+@media(min-width: 1000px) {
+    [max-width] {
+        margin: auto;
+        display: block;
+        max-width: 1000px;
+    }
 }
 
 //line underneath text inputs

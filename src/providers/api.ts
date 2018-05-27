@@ -176,7 +176,17 @@ export class Api {
          * Get a list of search results based on a search string
          */
         getSearchResults: async (searchText: string) => {
-            return await this.http2.get<any[]>(`api/mediaItems`, { q: searchText });
+            return await this.http2.graphqlRequest<Movie[]>(`
+                query Search($searchText: String!){
+                    mediaItems(searchText: $searchText){
+                        ...on Movie{
+                            id
+                            mediaType
+                            posterUrl
+                        }
+                    }
+                }
+            `, { searchText }, 'GET', 'mediaItems')
         }
     }
 
