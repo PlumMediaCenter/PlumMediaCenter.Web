@@ -13,7 +13,7 @@ export interface MovieMetadata {
     keywords: string[];
     posterUrls: any[];
     rating: string;
-    releaseDate: Date;
+    releaseYear: number;
     runtimeSeconds: number;
     sortTitle: string;
     summary: string;

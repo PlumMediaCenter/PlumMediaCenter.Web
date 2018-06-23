@@ -71,7 +71,7 @@ export class MovieMetadataPage {
         'collection',
         'collectionOrder',
         'rating',
-        'releaseDate',
+        'releaseYear',
         'runtime',
         'tmdbId'
     ];

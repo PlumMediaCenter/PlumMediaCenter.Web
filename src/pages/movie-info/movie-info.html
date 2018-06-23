@@ -11,14 +11,14 @@
     <div *ngIf="movie" max-width>
         <h1 class="title">{{movie.title}}</h1>
         <div class="various-info" text-center>
-            <ng-container inline-block v-center *ngIf="movie.releaseDate">{{movie.releaseDate | date:'y'}} </ng-container>
-            <ng-container inline-block v-center *ngIf="!movie.releaseDate">Release date unknown</ng-container>
+            <ng-container inline-block v-center *ngIf="movie.releaseYear">{{movie.releaseYear}} </ng-container>
+            <ng-container inline-block v-center *ngIf="!movie.releaseYear">Release date unknown</ng-container>
             <ion-badge v-center>{{movie.rating ? movie.rating : 'Rating unknown'}}</ion-badge>
             {{movie.runtimeSeconds ? Math.ceil(movie.runtimeSeconds/60) + ' minutes' : 'Runtime unknown'}}
         </div>
         <div class="backdrop-container">
             <div class="vignette-left"></div>
-            <img class="backdrop" [imageSwapper]="movie.backdropUrls"/>
+            <img class="backdrop" [imageSwapper]="movie.backdropUrls" />
             <div class="vignette-right"></div>
             <button class="play-button" ion-button [moviePlayClick]="movie">
                 <ion-icon name="play"></ion-icon>

@@ -31,7 +31,7 @@
                             <ion-col>
                                 <div>
                                     <h1 class="inline-block">{{result.title}}
-                                        <i>({{result.releaseDate|date:"y"}})</i>
+                                        <i>({{result.releaseYear}})</i>
                                         <a href="https://www.themoviedb.org/movie/{{result.tmdbId}}" target="_blank">
                                             <ion-badge class="v-center">
                                                 <ion-icon name="link"></ion-icon>
@@ -57,7 +57,9 @@
                 <ion-col>
                     <h1 text-center>Incoming Metadata </h1>
                     <div text-center>
-                        <div inline-block v-center>Selected TMDB ID: <a href="https://www.themoviedb.org/movie/{{tmdbId}}" target="_blank">{{tmdbId}}</a></div>
+                        <div inline-block v-center>Selected TMDB ID:
+                            <a href="https://www.themoviedb.org/movie/{{tmdbId}}" target="_blank">{{tmdbId}}</a>
+                        </div>
                         <button ion-button v-center (click)="changeIncoming()">Change</button>
                     </div>
                 </ion-col>
@@ -82,7 +84,7 @@
             <metadata-compare-row [comparison]="comparison" property="collection" type="text"></metadata-compare-row>
             <metadata-compare-row [comparison]="comparison" property="collectionOrder" type="text"></metadata-compare-row>
             <metadata-compare-row [comparison]="comparison" property="rating" type="text"></metadata-compare-row>
-            <metadata-compare-row [comparison]="comparison" property="releaseDate" type="date"></metadata-compare-row>
+            <metadata-compare-row [comparison]="comparison" property="releaseYear" type="text"></metadata-compare-row>
             <metadata-compare-row [comparison]="comparison" property="RuntimeSeconds" label="Runtime (minutes)" type="text"></metadata-compare-row>
             <metadata-compare-row [comparison]="comparison" property="genres" type="stringlist"></metadata-compare-row>
             <metadata-compare-row [comparison]="comparison" property="keywords" type="stringlist"></metadata-compare-row>

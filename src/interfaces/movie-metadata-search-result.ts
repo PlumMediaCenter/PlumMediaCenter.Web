@@ -3,5 +3,5 @@ export interface MovieMetadataSearchResult {
     posterUrl: string;
     tmdbId: number;
     overview: string;
-    releaseDate?: Date;
+    releaseYear?: number;
 }

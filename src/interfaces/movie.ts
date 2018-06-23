@@ -8,16 +8,16 @@ export interface Movie {
     runtimeSeconds: number;
     resumeSeconds: number;
     rating?: string;
-    releaseDate?: Date;
+    releaseYear?: number;
     tmdbId?: number;
-    posterUrl: string;
+    posterUrls: string[];
     backdropUrls: string[];
     videoUrl: string;
 }
 
 export interface CardMovie {
     id: number;
-    posterUrl: string;
+    posterUrls: string;
 }
 
 

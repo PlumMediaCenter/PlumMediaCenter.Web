@@ -20,6 +20,17 @@
             <ng-container *ngIf="lastGeneratedDateDifference">
                 ({{lastGeneratedDateDifference}} ago)
             </ng-container>
+            <div *ngIf="libraryStatus?.failedItems?.length > 0">
+                <span class="error-header">{{libraryStatus.failedItems.length}} failed
+                    <span *ngIf="libraryStatus.failedItems.length !== 1">items</span>
+                    <span *ngIf="libraryStatus.failedItems.length === 1">item</span>:
+                </span>
+                <ul>
+                    <li *ngFor="let item of libraryStatus.failedItems;">{{item.mediaType}}: {{item.path}}
+                        <br/>Error message: {{item.exception.message}}
+                    </li>
+                </ul>
+            </div>
         </ion-card-content>
         <div padding *ngIf="isCheckingStatus && percentage">
             processed {{libraryStatus.countCompleted}} of {{libraryStatus.countTotal}}
@@ -37,7 +48,7 @@
                 </ng-container>
             </ng-container>
             <ng-container *ngIf="libraryStatus && libraryStatus?.isProcessing">
-                <div *ngFor=" let file of libraryStatus.activeFiles; index as i; ">
+                <div *ngFor="let file of libraryStatus.activeFiles; index as i;">
                     <ng-container *ngIf="i < 5 ">
                         {{file}}
                     </ng-container>

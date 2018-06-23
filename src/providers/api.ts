@@ -24,7 +24,7 @@ export class Api {
             {
                 movies {
                     id
-                    posterUrl
+                    posterUrls
                 }
             }`, null, 'GET', 'movies');
         },
@@ -41,9 +41,9 @@ export class Api {
                         runtimeSeconds
                         resumeSeconds
                         rating
-                        releaseDate
+                        releaseYear
                         tmdbId
-                        posterUrl
+                        posterUrls
                         backdropUrls
                         videoUrl
                     }
@@ -64,7 +64,7 @@ export class Api {
             keywords
             posterUrls
             rating
-            releaseDate
+            releaseYear
             runtimeSeconds
             sortTitle
             summary
@@ -96,7 +96,7 @@ export class Api {
                         posterUrl
                         tmdbId
                         overview
-                        releaseDate
+                        releaseYear
                     }
                 }
             `, { searchText }, 'GET', 'movieMetadataSearchResults');
@@ -182,7 +182,7 @@ export class Api {
                         ...on Movie{
                             id
                             mediaType
-                            posterUrl
+                            posterUrls
                         }
                     }
                 }
@@ -200,13 +200,22 @@ export class Api {
             countRemaining
             secondsRemaining
             activeFiles
+            failedItems {
+                id
+                mediaType
+                path
+                exception {
+                    message
+                    stackTrace
+                }
+            }
             mediaTypeCounts {
                 mediaType
                 total
                 completed
                 remaining
             }
-            error {
+            exception {
                 message
                 stackTrace
             }

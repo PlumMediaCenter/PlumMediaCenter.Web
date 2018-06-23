@@ -1,4 +1,9 @@
 page-admin {
+    .error-header{
+        font-weight:bold;
+        font-size: 1.4em;
+        color: #ce0000;
+    }
     $spinner-color: white;
     ion-spinner {
         * {

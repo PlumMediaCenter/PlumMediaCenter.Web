@@ -10,7 +10,8 @@ export interface LibraryGenerationStatus {
     secondsRemaining: number;
     activeFiles: string[];
     mediaTypeCounts: MediaTypeCount[];
-    error: {
+    failedItems: FailedItem[];
+    exception: {
         message: string;
         stackTrace: string[];
     };
@@ -21,4 +22,14 @@ export interface MediaTypeCount {
     total: number;
     completed: number;
     remaining: number;
+}
+
+export interface FailedItem {
+    id?: number;
+    path: string;
+    mediaType: MediaType;
+    exception: {
+        message: string;
+        stackTrace: string[];
+    };
 }

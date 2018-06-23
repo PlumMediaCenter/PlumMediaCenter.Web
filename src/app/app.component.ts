@@ -31,7 +31,7 @@ export class MyApp {
             { title: 'Home', component: HomePage },
             { title: 'Admin', component: AdminPage },
             { title: 'Account', component: AccountPage }
-        ]; 
+        ];
     }
 
     async initializeApp() {
