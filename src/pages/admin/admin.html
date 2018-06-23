@@ -57,9 +57,9 @@
                     </ng-container>
                 </div>
             </ng-container>
-            <div style="color:red" *ngIf="libraryStatus?.error">
+            <div style="color:red" *ngIf="libraryStatus?.exception">
                 Library generation failed.
-                <br/> {{libraryStatus?.error.message}}
+                <br/> {{libraryStatus?.exception.message}}
             </div>
         </ion-card-content>
 

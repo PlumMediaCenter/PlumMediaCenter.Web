@@ -13,7 +13,7 @@ export class ProperCaseSpacePipe implements PipeTransform {
     public transform(input: string): string {
         return ProperCaseSpacePipe.transform(input);
     }
-    
+
     public static transform(input: string): string {
         if (!input) {
             return '';
