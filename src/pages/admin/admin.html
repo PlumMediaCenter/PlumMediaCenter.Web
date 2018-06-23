@@ -13,7 +13,10 @@
             <h1>Library</h1>
         </ion-card-header>
         <ion-card-content *ngIf="!isCheckingStatus">
-            Last generated on {{libraryStatus?.lastGeneratedDate|date:"EEEE MMMM d 'at' hh:mm a"}}{{!libraryStatus?'"unknown"':''}}
+            Last generated
+            <span *ngIf="libraryStatus?.lastGeneratedDate">on {{libraryStatus?.lastGeneratedDate|date:"EEEE MMMM d 'at' hh:mm a"}} </span>
+            <span *ngIf="!libraryStatus && !isCheckingStatus">: unknown</span>
+            <span *ngIf="libraryStatus && !libraryStatus?.lastGeneratedDate">: never</span>
             <ng-container *ngIf="lastGeneratedDateDifference">
                 ({{lastGeneratedDateDifference}} ago)
             </ng-container>

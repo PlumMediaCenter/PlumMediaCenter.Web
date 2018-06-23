@@ -20,11 +20,12 @@ export class AdminPage {
         this.init();
     }
     private async init() {
+        this.isCheckingStatus = true;
         this.monitorStatus();
         this.sources = await this.api.sources.getAll();
     }
     public libraryStatus: LibraryGenerationStatus;
-    public isCheckingStatus: boolean = false;
+    public isCheckingStatus: boolean;
 
     public get generateLibraryButtonIsVisible() {
         return this.isLibGenRequestProcessing === false &&
@@ -51,7 +52,7 @@ export class AdminPage {
     public async monitorStatus() {
         var interval = 2000;
         try {
-            if (this.isCheckingStatus == false) {
+            if (!this.isCheckingStatus) {
                 this.isCheckingStatus = true;
                 this.libraryStatus = undefined;
                 await this.util.timeoutAsync(interval);
