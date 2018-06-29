@@ -21,8 +21,8 @@ export class InstallDatabasePage {
     ) {
 
     }
-    public rootUsername: string;
-    public rootPassword: string;
+    public rootUsername: string = 'root';
+    public rootPassword: string = 'romantic';
 
     public async install() {
         var stop = this.loader.showForMinimum('Installing database');

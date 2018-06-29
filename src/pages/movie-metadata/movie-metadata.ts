@@ -125,8 +125,6 @@ export class MovieMetadataPage {
                 this.comparison.current[key] = value.slice();
             }
         }
-        //only keep the first poster
-        this.comparison.current.posterUrls = [this.comparison.current.posterUrls[0]];
     }
 
     public async save() {

@@ -1,6 +1,5 @@
 <div class="image-container" *ngFor="let url of urls; index as i;">
     <img [ngClass]="{'poster': imageType === 'poster', 'backdrop-card': imageType === 'backdrop'}" [src]="url" />
-
     <button color="{{buttonType === 'add'?'secondary': 'danger'}}" ion-button class="add-remove-button" (click)="addRemoveClick(url)">
         <ion-icon name="{{buttonType === 'add'?'add': 'remove'}}"></ion-icon>
     </button>

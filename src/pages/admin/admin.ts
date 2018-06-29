@@ -43,19 +43,20 @@ export class AdminPage {
 
     public async generateLibrary() {
         this.isLibGenRequestProcessing = true;
-        await this.util.timeoutAsync(1000);
         this.libraryStatus = await this.api.library.generate();
         this.monitorStatus();
         this.isLibGenRequestProcessing = false;
     }
 
     public async monitorStatus() {
-        var interval = 2000;
+        var interval = 0;
         try {
             if (!this.isCheckingStatus) {
                 this.isCheckingStatus = true;
                 this.libraryStatus = undefined;
                 await this.util.timeoutAsync(interval);
+                //set the interval AFTER the first check
+                interval = 2000;
                 this.libraryStatus = await this.api.library.getStatus();
                 while (this.libraryStatus && this.libraryStatus.isProcessing) {
                     this.libraryStatus = await this.api.library.getStatus();
