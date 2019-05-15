@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Sources</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-card *ngFor="let source of sources">
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col col-12 col-sm>
+                        <ion-item>
+                            <ion-label floating>Path</ion-label>
+                            <ion-input type="text" [(ngModel)]="source.folderPath"></ion-input>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-12 col-sm>
+                        <ion-item>
+                            <ion-label floating>Media Type</ion-label>
+                            <ion-select [(ngModel)]="source.mediaType">
+                                <ng-container *ngFor="let mediaType of mediaTypes">
+                                    <!-- <ion-option [value]="mediaType.value">{{mediaType.title}}</ion-option> -->
+                                </ng-container>
+                            </ion-select>
+                        </ion-item>
+                    </ion-col>
+                    <ion-col col-sm-2 text-center>
+                        <ion-item>
+                            <ion-button ion-button color="danger" (click)="sources.splice(sources.indexOf(source),1)">Delete</ion-button>
+                        </ion-item>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+    <ion-button ion-button color="secondary" (click)="sources.push({})">
+        <ion-icon name="add"></ion-icon>&nbsp;Add source
+    </ion-button>
+    <ion-button ion-fab class="save" color="primary" (click)="save()">
+        <save-icon></save-icon>
+    </ion-button>
+</ion-content>

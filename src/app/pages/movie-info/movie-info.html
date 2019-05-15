@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-title>Movie Info</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content relative>
+    <div *ngIf="movie" max-width>
+        <h1 class="title">{{movie.title}}</h1>
+        <div class="various-info" text-center>
+            <ng-container inline-block v-center *ngIf="movie.releaseYear">{{movie.releaseYear}} </ng-container>
+            <ng-container inline-block v-center *ngIf="!movie.releaseYear">Release date unknown</ng-container>
+            <ion-badge v-center>{{movie.rating ? movie.rating : 'Rating unknown'}}</ion-badge>
+            {{movie.runtimeSeconds ? Math.ceil(movie.runtimeSeconds/60) + ' minutes' : 'Runtime unknown'}}
+        </div>
+        <div class="backdrop-container">
+            <div class="vignette-left"></div>
+            <img class="backdrop" [imageSwapper]="movie.backdropUrls" />
+            <div class="vignette-right"></div>
+            <button class="play-button" ion-button [moviePlayClick]="movie">
+                <ion-icon name="play"></ion-icon>
+            </button>
+        </div>
+        <div text-center>
+        </div>
+        <p>{{movie.summary? movie.summary: 'No summary available'}}</p>
+        <button ion-button [movieMetadataClick]="movie">Manage Metadata</button>
+        <button ion-button [mediaItemProcessClick]="movie">Process Movie</button>
+        <a target="_blank" *ngIf="movie.tmdbId" href="https://www.themoviedb.org/movie/{{movie.tmdbId}}">
+            <button ion-button>View on TMDB</button>
+        </a>
+    </div>
+</ion-content>

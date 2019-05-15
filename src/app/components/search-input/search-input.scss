@@ -1,0 +1,18 @@
+search-input {
+    display: block;
+    padding: 5px;
+    ion-searchbar {
+        padding: 0 !important;
+    }
+    .searchbar-container {
+        margin-right: 42px;
+    }
+    .search-button {
+        float: right;
+        width: 42px;
+        color: black;
+        border: 0;
+        height: 42px;
+        margin: 0;
+    }
+}
