@@ -92,8 +92,10 @@
             <metadata-compare-row [comparison]="comparison" property="posterUrls" label="Posters" type="imagelist"></metadata-compare-row>
             <metadata-compare-row [comparison]="comparison" property="backdropUrls" label="Backdrops" type="imagelist"></metadata-compare-row>
         </ion-grid>
-        <button ion-fab class="save" color="primary" (click)="save()">
-            <save-icon></save-icon>
-        </button>
+        <ion-fab (click)="save()" color="primary" vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button>
+                <ion-icon name="save"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
     </ng-container>
 </ion-content>

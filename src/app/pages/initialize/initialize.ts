@@ -7,7 +7,8 @@ import { HomePage } from '../home/home';
 
 @Component({
     selector: 'page-initialize',
-    templateUrl: 'initialize.html'
+    templateUrl: 'initialize.html',
+    styleUrls: ['initialize.scss']
 })
 export class InitializePage {
 

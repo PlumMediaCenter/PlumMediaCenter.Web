@@ -8,7 +8,8 @@ import { Toaster } from '../../providers/toaster';
 
 @Component({
     selector: 'page-movie-metadata',
-    templateUrl: 'movie-metadata.html'
+    templateUrl: 'movie-metadata.html',
+    styleUrls: ['movie-metadata.scss']
 })
 export class MovieMetadataPage {
     constructor(

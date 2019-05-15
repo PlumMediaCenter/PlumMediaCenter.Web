@@ -1,11 +1,12 @@
 <ion-header>
     <ion-toolbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
         <ion-title>Movie Info</ion-title>
     </ion-toolbar>
 </ion-header>
+
 
 <ion-content relative>
     <div *ngIf="movie" max-width>
@@ -27,10 +28,10 @@
         <div text-center>
         </div>
         <p>{{movie.summary? movie.summary: 'No summary available'}}</p>
-        <button ion-button [movieMetadataClick]="movie">Manage Metadata</button>
-        <button ion-button [mediaItemProcessClick]="movie">Process Movie</button>
+        <ion-button [movieMetadataClick]="movie">Manage Metadata</ion-button>
+        <ion-button [mediaItemProcessClick]="movie">Process Movie</ion-button>
         <a target="_blank" *ngIf="movie.tmdbId" href="https://www.themoviedb.org/movie/{{movie.tmdbId}}">
-            <button ion-button>View on TMDB</button>
+            <ion-button>View on TMDB</ion-button>
         </a>
     </div>
 </ion-content>

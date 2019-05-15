@@ -3,12 +3,13 @@ import { Movie } from '../../interfaces/movie';
 
 @Component({
     selector: 'movie-card',
-    templateUrl: 'movie-card.html'
+    templateUrl: 'movie-card.html',
+    styleUrls: ['movie-card.scss']
 })
 export class MovieCardComponent {
 
     constructor() {
-        //during development, use an epoch time on querystring 
+        //during development, use an epoch time on querystring
         this.epoch = new Date().getTime();
     }
 

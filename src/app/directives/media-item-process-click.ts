@@ -42,8 +42,8 @@ export class MediaItemProcessClickDirective {
         //try to refresh the current view
         // TODO let component = this.navCtrl.getActive().instance;
         //re-run the view load function if the page has one
-        // if (component.ionViewDidLoad) {
-        //     component.ionViewDidLoad();
+        // if (component.ngOnInit) {
+        //     component.ngOnInit();
         // }
     }
 }

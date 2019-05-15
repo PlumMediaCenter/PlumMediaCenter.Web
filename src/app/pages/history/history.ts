@@ -7,7 +7,8 @@ import { Loader } from '../../providers/loader';
 
 @Component({
     selector: 'page-history',
-    templateUrl: 'history.html'
+    templateUrl: 'history.html',
+    styleUrls: ['history.scss']
 })
 export class HistoryPage {
     constructor(
@@ -19,7 +20,7 @@ export class HistoryPage {
     }
     public Math = Math;
 
-    ionViewDidLoad() {
+    ngOnInit() {
         this.index = 0;
         this.posterFolderUrl = `${this.appSettings.apiUrl}/posters/`;
         this.size = 50;

@@ -6,7 +6,8 @@ import { Util } from '../../providers/util';
 import { Alerter } from '../../providers/alerter';
 @Component({
     selector: 'page-admin',
-    templateUrl: 'admin.html'
+    templateUrl: 'admin.html',
+    styleUrls: ['admin.scss']
 })
 export class AdminPage {
 

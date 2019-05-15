@@ -7,7 +7,8 @@ import { Toaster } from '../../providers/toaster';
 
 @Component({
     selector: 'page-install-database',
-    templateUrl: 'install-database.html'
+    templateUrl: 'install-database.html',
+    styleUrls: ['install-database.scss']
 })
 export class InstallDatabasePage {
 

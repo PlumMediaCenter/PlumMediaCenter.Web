@@ -12,26 +12,22 @@
         <ion-card-content>
             <ion-grid>
                 <ion-row>
-                    <ion-col col-12 col-sm>
+                    <ion-col>
                         <ion-item>
-                            <ion-label floating>Path</ion-label>
-                            <ion-input type="text" [(ngModel)]="source.folderPath"></ion-input>
-                        </ion-item>
-                    </ion-col>
-                    <ion-col col-12 col-sm>
-                        <ion-item>
-                            <ion-label floating>Media Type</ion-label>
+                            <ion-label position="floating">Media Type</ion-label>
                             <ion-select [(ngModel)]="source.mediaType">
-                                <ng-container *ngFor="let mediaType of mediaTypes">
-                                    <!-- <ion-option [value]="mediaType.value">{{mediaType.title}}</ion-option> -->
-                                </ng-container>
+                                <ion-select-option *ngFor="let mediaType of mediaTypes" [value]="mediaType.value">{{mediaType.title}}</ion-select-option>
                             </ion-select>
                         </ion-item>
                     </ion-col>
-                    <ion-col col-sm-2 text-center>
+                    <ion-col>
                         <ion-item>
-                            <ion-button ion-button color="danger" (click)="sources.splice(sources.indexOf(source),1)">Delete</ion-button>
+                            <ion-label position="floating">Path</ion-label>
+                            <ion-input type="text" [(ngModel)]="source.folderPath"></ion-input>
                         </ion-item>
+                    </ion-col>
+                    <ion-col text-center size="auto">
+                        <ion-item color="danger" (click)="sources.splice(sources.indexOf(source),1)">Delete</ion-item>
                     </ion-col>
                 </ion-row>
             </ion-grid>
@@ -40,7 +36,9 @@
     <ion-button ion-button color="secondary" (click)="sources.push({})">
         <ion-icon name="add"></ion-icon>&nbsp;Add source
     </ion-button>
-    <ion-button ion-fab class="save" color="primary" (click)="save()">
-        <save-icon></save-icon>
-    </ion-button>
+    <ion-fab (click)="save()" color="primary" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-icon name="save"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

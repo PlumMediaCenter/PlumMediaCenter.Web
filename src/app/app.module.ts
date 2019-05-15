@@ -30,7 +30,6 @@ import { VideojsVideoComponent } from './components/videojs-video/videojs-video'
 import { ImageSwapperDirective } from './directives/image-swapper';
 import { GoToPageClickDirective } from './directives/go-to-page-click';
 import { SourcesPage } from './pages/sources/sources';
-import { SaveIconComponent } from './components/save-icon/save-icon';
 import { Alerter } from './providers/alerter';
 import { Loader } from './providers/loader';
 import { Toaster } from './providers/toaster';
@@ -48,7 +47,6 @@ import { MediaInfoClickDirective } from './directives/media-info-click';
 import { SearchResultsPage } from './pages/search-results/search-results';
 import { SearchInputComponent } from './components/search-input/search-input';
 import { AppSettings } from './providers/app-settings';
-
 
 @NgModule({
     declarations: [
@@ -73,7 +71,6 @@ import { AppSettings } from './providers/app-settings';
         ProgressSparseComponent,
         StringListComponent,
         VideojsVideoComponent,
-        SaveIconComponent,
         SearchInputComponent,
         ProgressBarComponent,
 
@@ -88,7 +85,7 @@ import { AppSettings } from './providers/app-settings';
         MediaItemProcessClickDirective,
 
         //pipes
-        ProperCaseSpacePipe
+        ProperCaseSpacePipe,
     ],
     entryComponents: [
         AppComponent,

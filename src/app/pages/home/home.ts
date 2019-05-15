@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Api } from '../../providers/api';
 import { CardMovie } from '../../interfaces/movie';
 
@@ -6,14 +6,14 @@ import { CardMovie } from '../../interfaces/movie';
     selector: 'page-home',
     templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
     constructor(
         public api: Api
     ) {
 
     }
-    async ionViewDidLoad() {
+    async ngOnInit() {
         this.movies = await this.api.movies.getAll();
     }
     public movies: CardMovie[];

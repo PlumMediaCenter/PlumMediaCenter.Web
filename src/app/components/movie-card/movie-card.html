@@ -1,1 +1,1 @@
-<img class="poster" [src]="movie.posterUrls[0] + '?nocache=' + epoch" [movieInfoClick]="movie" />
+<img class="poster" [src]="movie.posterUrls[0] + '?nocache=' + epoch" routerLink="/movies/{{movie.id}}" />

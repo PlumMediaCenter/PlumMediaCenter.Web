@@ -9,7 +9,8 @@ import { Source } from '../../interfaces/source';
 
 @Component({
     selector: 'page-sources',
-    templateUrl: 'sources.html'
+    templateUrl: 'sources.html',
+    styleUrls: ['sources.scss']
 })
 export class SourcesPage {
 
