@@ -1,8 +1,8 @@
 <ion-header>
     <ion-toolbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
         <ion-title>Viewing History</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -14,9 +14,9 @@
             <ion-card-content>
                 <img class="pointer" [src]="record.posterUrl" [mediaInfoClick]="record.mediaItemId" />
                 <div class="right-area">
-                    <button ion-button small class="delete-button" color="danger" (click)="deleteHistoryRecord(record)">
+                    <ion-button size="small" class="delete-button" color="danger" (click)="deleteHistoryRecord(record)">
                         <ion-icon name="close"></ion-icon>
-                    </button>
+                    </ion-button>
                     <ion-grid>
                         <ion-row>
                             <h1>
@@ -34,8 +34,9 @@
                             </ion-col>
                         </ion-row>
                         <ion-row>
-                            <progress-sparse style="width: 100%" unit="min" [min]="0" [max]="record.runtimeMinutes" [lower]="record.progressMinutesBegin"
-                                [upper]="record.progressMinutesEnd"></progress-sparse>
+                            <progress-sparse style="width: 100%" unit="min" [min]="0" [max]="record.runtimeMinutes"
+                                [lower]="record.progressMinutesBegin" [upper]="record.progressMinutesEnd">
+                            </progress-sparse>
                         </ion-row>
                     </ion-grid>
                 </div>

@@ -1,13 +1,13 @@
-page-movie-metadata {
-    .backdrop {
-        width: 50%;
-        margin-right: 0px;
-        display: block;
-    }
-    .search-result:hover {
-        background-color: blue;
-    }
-    .scroll-content {
-        padding-bottom: 50px;
-    }
+.backdrop {
+    width: 50%;
+    margin-right: 0px;
+    display: block;
+}
+
+.search-result:hover {
+    background-color: blue;
+}
+
+.scroll-content {
+    padding-bottom: 50px;
 }

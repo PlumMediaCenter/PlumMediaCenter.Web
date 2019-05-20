@@ -5,6 +5,7 @@ import { Movie } from '../../interfaces/movie';
 import { MovieMetadataComparison } from '../../interfaces/movie-metadata-comparison';
 import { MovieMetadataSearchResult } from '../../interfaces/movie-metadata-search-result';
 import { Toaster } from '../../providers/toaster';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'page-movie-metadata',
@@ -13,7 +14,7 @@ import { Toaster } from '../../providers/toaster';
 })
 export class MovieMetadataPage {
     constructor(
-        public navParams: NavParams,
+        public activatedRoute: ActivatedRoute,
         public api: Api,
         public loadingCtrl: LoadingController,
         private alertCtrl: AlertController,
@@ -23,7 +24,7 @@ export class MovieMetadataPage {
     }
 
     public async init() {
-        let movieId = this.navParams.data.movieId;
+        let movieId = this.activatedRoute.snapshot.params.id;
         //movieId = 3;
         this.movie = await this.api.movies.getById(movieId);
         this.tmdbId = this.movie.tmdbId;

@@ -1,12 +1,13 @@
 <ion-header>
     <ion-toolbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
         <ion-title>Account</ion-title>
     </ion-toolbar>
 </ion-header>
 
+
 <ion-content padding>
-    <button ion-button goToPageClick="History">Viewing history</button>
+    <ion-button routerLink="/history">Viewing history</ion-button>
 </ion-content>

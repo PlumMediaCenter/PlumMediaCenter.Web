@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { MovieMetadataComparison } from '../../interfaces/movie-metadata-comparison';
-import { ProperCaseSpacePipe } from '../../pipes/proper-case-space-pipe';
+import { MovieMetadataComparison } from '../../../interfaces/movie-metadata-comparison';
+import { ProperCaseSpacePipe } from '../../../pipes/proper-case-space-pipe';
 
 @Component({
     selector: 'metadata-compare-row',

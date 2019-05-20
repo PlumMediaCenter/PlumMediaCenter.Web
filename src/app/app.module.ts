@@ -18,8 +18,6 @@ import { Http2Factory } from './providers/http2-factory';
 import { MovieInfoClickDirective } from './directives/movie-info-click';
 import { MovieInfoPage } from './pages/movie-info/movie-info';
 import { MovieMetadataPage } from './pages/movie-metadata/movie-metadata';
-import { MovieMetadataClickDirective } from './directives/movie-metadata-click';
-import { MetadataCompareRowComponent } from './components/metadata-compare-row/metadata-compare-row';
 import { ImageListComponent } from './components/image-list/image-list';
 import { ProperCaseSpacePipe } from './pipes/proper-case-space-pipe';
 import { StringListComponent } from './components/string-list/string-list';
@@ -28,7 +26,6 @@ import { MoviePlayPage } from './pages/movie-play/movie-play';
 import { MoviePlayClickDirective } from './directives/movie-play-click';
 import { VideojsVideoComponent } from './components/videojs-video/videojs-video';
 import { ImageSwapperDirective } from './directives/image-swapper';
-import { GoToPageClickDirective } from './directives/go-to-page-click';
 import { SourcesPage } from './pages/sources/sources';
 import { Alerter } from './providers/alerter';
 import { Loader } from './providers/loader';
@@ -47,6 +44,7 @@ import { MediaInfoClickDirective } from './directives/media-info-click';
 import { SearchResultsPage } from './pages/search-results/search-results';
 import { SearchInputComponent } from './components/search-input/search-input';
 import { AppSettings } from './providers/app-settings';
+import { MetadataCompareRowComponent } from './pages/movie-metadata/metadata-compare-row/metadata-compare-row';
 
 @NgModule({
     declarations: [
@@ -78,10 +76,8 @@ import { AppSettings } from './providers/app-settings';
         DeviceSizeIfDirective,
         MovieInfoClickDirective,
         MediaInfoClickDirective,
-        MovieMetadataClickDirective,
         MoviePlayClickDirective,
         ImageSwapperDirective,
-        GoToPageClickDirective,
         MediaItemProcessClickDirective,
 
         //pipes

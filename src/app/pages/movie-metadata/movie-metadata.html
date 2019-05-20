@@ -1,8 +1,8 @@
 <ion-header>
     <ion-toolbar>
-        <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
-        </button>
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
         <ion-title>Movie Metadata</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -14,7 +14,7 @@
             <ion-item>
                 <ion-label color="primary">Search Text: </ion-label>
                 <ion-input placeholder="Text Input" [(ngModel)]="searchText" name="searchText"></ion-input>
-                <button type="submit" ion-button item-content clear>Search</button>
+                <ion-button type="submit" item-content clear>Search</ion-button>
             </ion-item>
         </form>
         <ng-container *ngIf="searchResults">
@@ -45,7 +45,7 @@
                         </ion-row>
                     </ion-grid>
                     <div text-center>
-                        <button ion-button (click)="tmdbId=result.tmdbId">Use this movie</button>
+                        <ion-button (click)="tmdbId=result.tmdbId">Use this movie</ion-button>
                     </div>
                 </ion-card-content>
             </ion-card>
@@ -60,15 +60,15 @@
                         <div inline-block v-center>Selected TMDB ID:
                             <a href="https://www.themoviedb.org/movie/{{tmdbId}}" target="_blank">{{tmdbId}}</a>
                         </div>
-                        <button ion-button v-center (click)="changeIncoming()">Change</button>
+                        <ion-button v-center (click)="changeIncoming()">Change</ion-button>
                     </div>
                 </ion-col>
                 <ion-col col-2 text-center>
                     <h1>
-                        <button ion-button title="Use all incoming" (click)="useAllIncoming()">
+                        <ion-button title="Use all incoming" (click)="useAllIncoming()">
                             <ion-icon name="arrow-round-forward"></ion-icon>&nbsp;&nbsp;
                             <ion-icon name="arrow-round-forward"></ion-icon>
-                        </button>
+                        </ion-button>
                     </h1>
                 </ion-col>
                 <ion-col>

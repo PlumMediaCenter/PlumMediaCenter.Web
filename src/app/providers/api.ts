@@ -48,7 +48,7 @@ export class Api {
                         videoUrl
                     }
                 }
-            `, { id }, 'GET', 'movies.0');
+            `, { id: id }, 'GET', 'movies.0');
         }
     };
 

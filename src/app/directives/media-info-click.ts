@@ -2,12 +2,14 @@ import { Directive, Input, HostListener } from '@angular/core';
 import { MovieInfoPage } from '../pages/movie-info/movie-info';
 import { Api } from '../providers/api';
 import { Loader } from '../providers/loader';
+import { Router } from '@angular/router';
 
 @Directive({ selector: '[mediaInfoClick]' })
 export class MediaInfoClickDirective {
     constructor(
         private api: Api,
-        private loader: Loader
+        private loader: Loader,
+        private router: Router
     ) {
 
     }
@@ -24,9 +26,9 @@ export class MediaInfoClickDirective {
         try {
             let mediaItem = await this.api.mediaItems.getMediaItem(this.mediaItemId);
 
-            switch (mediaItem.mediaType) {
-                case 'MOVIE':
-                    // TODO this.navCtrl.push(MovieInfoPage, { movieId: mediaItem.id });
+            switch (mediaItem.mediaType.toLowerCase()) {
+                case 'movie':
+                    this.router.navigateByUrl(`/movies/${mediaItem.id}`);
                     break;
                 default:
                     throw new Error('Not implemented');

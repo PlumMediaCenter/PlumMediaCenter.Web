@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 import { Api } from '../../providers/api';
 import { Movie } from '../../interfaces/movie';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'page-movie-play',
@@ -11,17 +12,18 @@ import { Movie } from '../../interfaces/movie';
 export class MoviePlayPage implements OnInit {
 
     constructor(
-        public navParams: NavParams,
-        public api: Api
+        public api: Api,
+        public activatedRoute: ActivatedRoute
     ) {
 
     }
+
+    private get movieId() {
+        return this.activatedRoute.snapshot.params.id;
+    }
+
     public movie: Movie;
     async ngOnInit() {
-        this.movie = this.navParams.data.movie;
-        //if the movie doesn't have what we need, fetch it.
-        if (!this.movie || this.movie.resumeSeconds === undefined) {
-            this.movie = await this.api.movies.getById(this.navParams.data.movieId);
-        }
+        this.movie = await this.api.movies.getById(this.movieId);
     }
 }

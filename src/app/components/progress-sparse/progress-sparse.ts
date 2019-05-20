@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'progress-sparse',
-    templateUrl: 'progress-sparse.html'
+    templateUrl: 'progress-sparse.html',
+    styleUrls: ['progress-sparse.scss']
 })
 export class ProgressSparseComponent {
 

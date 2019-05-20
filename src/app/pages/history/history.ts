@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Api } from '../../providers/api';
 import { Alerter } from '../../providers/alerter';
 import { AppSettings } from '../../providers/app-settings';
@@ -10,7 +10,7 @@ import { Loader } from '../../providers/loader';
     templateUrl: 'history.html',
     styleUrls: ['history.scss']
 })
-export class HistoryPage {
+export class HistoryPage implements OnInit {
     constructor(
         public api: Api,
         public appSettings: AppSettings,

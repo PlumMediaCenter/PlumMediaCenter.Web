@@ -7,7 +7,7 @@
     <ion-content>
         <ion-searchbar (ionChange)="search($event.detail.value)"></ion-searchbar><!-- <search-input [nav]="nav"></search-input> -->
         <ion-list>
-            <ion-item *ngFor="let p of pages" [routerLink]="[p.url]">
+            <ion-item *ngFor="let p of pages" [routerLink]="[p.url]" (click)="hideMenu()">
                 <ion-label>{{p.title}}</ion-label>
             </ion-item>
         </ion-list>
