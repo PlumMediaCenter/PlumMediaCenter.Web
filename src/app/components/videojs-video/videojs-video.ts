@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, Input, AfterViewInit, OnDestroy, ViewEncapsulation } from '@angular/core';
 import videojs from 'video.js';
 import { AppSettings } from '../../providers/app-settings';
 import { Api } from '../../providers/api';
@@ -7,8 +7,10 @@ import { Api } from '../../providers/api';
     selector: 'videojs-video',
     templateUrl: 'videojs-video.html',
     styleUrls: [
+        'videojs-video.scss',
         '../../../../node_modules/video.js/dist/video-js.css'
-    ]
+    ],
+    encapsulation: ViewEncapsulation.None
 })
 export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
     private static indexCounter = 1;
@@ -58,6 +60,7 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
         this.player = videojs(element, {
             poster: this.poster,
             autoplay: this.autoplay,
+            fluid: false
         }, () => {
             //seek to the playback seconds specified
             if (this._seconds) {

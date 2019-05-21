@@ -1,15 +1,11 @@
-<ion-header>
-    <ion-toolbar>
-        <ion-buttons slot="start">
-            <ion-menu-button autoHide="false"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>Watching: {{movie? movie.title: 'video'}}</ion-title>
-    </ion-toolbar>
-</ion-header>
-
 <ion-content>
-    <ng-container *ngIf="movie">
-        <videojs-video [mediaItemId]="movie.id" [url]="movie.videoUrl" [poster]="movie.backdropUrls[0]"
+    <div class="back-container">
+        <ion-button color="light" fill="clear" (click)="back()">
+            <ion-icon name="arrow-round-back"></ion-icon>
+        </ion-button>
+    </div>
+    <ng-container *ngIf="movie && isVideoVisible">
+        <videojs-video full [mediaItemId]="movie.id" [url]="movie.videoUrl" [poster]="movie.backdropUrls[0]"
             [autoplay]="true" [seconds]="resumeSeconds"></videojs-video>
     </ng-container>
 </ion-content>

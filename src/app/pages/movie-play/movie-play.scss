@@ -1,4 +1,16 @@
+:host {
+    --ion-background-color: black;
+}
+
 ion-content {
     width: 100%;
     height: 100%;
+    position: relative;
+}
+
+.back-container {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    z-index: 30;
 }

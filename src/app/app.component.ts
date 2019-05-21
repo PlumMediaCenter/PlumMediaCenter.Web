@@ -1,15 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
-
+import { Component} from '@angular/core';
 import { Platform, MenuController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
-
-import { HomePage } from './pages/home/home';
-import { AdminPage } from './pages/admin/admin';
-import { Api } from './providers/api';
 import { InitializePage } from './pages/initialize/initialize';
-import { AccountPage } from './pages/account/account';
 
 
 @Component({

@@ -45,6 +45,7 @@ import { SearchResultsPage } from './pages/search-results/search-results';
 import { SearchInputComponent } from './components/search-input/search-input';
 import { AppSettings } from './providers/app-settings';
 import { MetadataCompareRowComponent } from './pages/movie-metadata/metadata-compare-row/metadata-compare-row';
+import { BackClickDirective } from './directives/back-click';
 
 @NgModule({
     declarations: [
@@ -79,6 +80,7 @@ import { MetadataCompareRowComponent } from './pages/movie-metadata/metadata-com
         MoviePlayClickDirective,
         ImageSwapperDirective,
         MediaItemProcessClickDirective,
+        BackClickDirective,
 
         //pipes
         ProperCaseSpacePipe,
