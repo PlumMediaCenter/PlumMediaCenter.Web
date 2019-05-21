@@ -18,6 +18,18 @@ export class MoviePlayPage implements OnInit {
 
     }
 
+    /**
+     * The seconds the video should resume playback at
+     */
+    public get resumeSeconds() {
+        const fromQuery = this.activatedRoute.snapshot.queryParams.resumeSeconds;
+        if (fromQuery !== null && fromQuery !== undefined) {
+            return fromQuery;
+        } else {
+            return this.movie.resumeSeconds;
+        }
+    }
+
     private get movieId() {
         return this.activatedRoute.snapshot.params.id;
     }

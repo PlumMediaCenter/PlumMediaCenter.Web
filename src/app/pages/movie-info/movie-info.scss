@@ -25,12 +25,30 @@
 .backdrop {
     position: relative;
     width: 100%;
+    max-width: 800px;
     margin: auto;
     display: block;
     background-color: var(--ion-background-color);
     height: 35%;
     overflow: hidden;
+    color: #f13939;
 }
+
+//hide the bottom vignette above certain screen size
+@media(min-width: 800px) {
+    .vignette-bottom {
+        display: none;
+    }
+}
+
+//hide the top vignette above certain screen size
+@media(min-width: 880px) {
+    .vignette-top {
+        display: none;
+    }
+}
+
+
 
 .backdrop-image {
     z-index: 1;

@@ -25,9 +25,19 @@
 
         <!--play button-->
         <div text-center>
-            <ion-button color="success" routerLink="/movies/{{movie.id}}/play">
-                <ion-icon name="play"></ion-icon>&nbsp;Watch Now
-            </ion-button>
+            <ng-container *ngIf="isInProgress">
+                <ion-button color="success" routerLink="/movies/{{movie.id}}/play">
+                    <ion-icon name="play"></ion-icon>&nbsp;Resume
+                </ion-button>
+                <ion-button color="medium" routerLink="/movies/{{movie.id}}/play" [queryParams]="{resumeSeconds: 0}">
+                    <ion-icon name="refresh"></ion-icon>&nbsp;Start Over
+                </ion-button>
+            </ng-container>
+            <ng-container *ngIf="isInProgress === false">
+                <ion-button color="success" routerLink="/movies/{{movie.id}}/play">
+                    <ion-icon name="play"></ion-icon>&nbsp;Watch Now
+                </ion-button>
+            </ng-container>
         </div>
         <div padding>
             <p>{{movie.summary? movie.summary: 'No summary available'}}</p>

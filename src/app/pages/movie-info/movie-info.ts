@@ -39,5 +39,12 @@ export class MovieInfoPage implements OnInit {
         this.ngOnInit();
     }
 
+    /**
+     * Determines whether the user had stopped a viewing session before the video was finished
+     */
+    public get isInProgress() {
+        return this.movie.resumeSeconds > 0;
+    }
+
     public movie: Movie;
 }

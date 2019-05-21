@@ -65,6 +65,10 @@ img.backdrop-card {
         display: block;
         max-width: 1000px;
     }
+
+    [hidden-max-width] {
+        display: none;
+    }
 }
 
 //line underneath text inputs
