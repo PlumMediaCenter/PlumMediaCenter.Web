@@ -8,6 +8,7 @@
 @import '~@ionic/angular/css/text-alignment.css';
 @import '~@ionic/angular/css/text-transformation.css';
 @import '~@ionic/angular/css/flex-utils.css';
+
 *[inline-block],
 .inline-block {
     display: inline-block;
@@ -21,16 +22,18 @@
     position: relative;
 }
 
-.full-width {
+.full-width,
+[full-width] {
     width: 100%;
+}
+
+.full-height,
+[full-height] {
+    height: 100%;
 }
 
 .fill {
     width: 100%;
-    height: 100%;
-}
-
-.full-height {
     height: 100%;
 }
 
@@ -82,10 +85,12 @@ movie-card .poster {
         width: 100px;
         height: 150px;
     }
+
     .backdrop-card {
         width: 151px;
         height: 84px;
     }
+
     .hide-xs {
         display: none !important;
     }
@@ -97,10 +102,12 @@ movie-card .poster {
         width: 134px;
         height: 201px;
     }
+
     .backdrop-card {
         width: 208px;
         height: 117px;
     }
+
     .hide-sm {
         display: none !important;
     }
@@ -112,10 +119,12 @@ movie-card .poster {
         width: 172px;
         height: 258px;
     }
+
     .backdrop-card {
         width: 263px;
         height: 147px;
     }
+
     .hide-md {
         display: none !important;
     }
@@ -127,11 +136,29 @@ movie-card .poster {
         width: 208px;
         height: 312px;
     }
+
     .backdrop-card {
         width: 320px;
         height: 180px;
     }
+
     .hide-lg {
         display: none !important;
     }
+}
+
+.fader-image {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -ms-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+}
+
+.transparent {
+    opacity: 0;
 }
