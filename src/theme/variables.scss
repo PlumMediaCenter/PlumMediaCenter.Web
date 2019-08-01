@@ -1,11 +1,19 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+
 /** Ionic CSS Variables **/
 :root {
     //update index.html `theme-color` if you change this background color
     --ion-background-color: #232323;
     --ion-text-color: #FFFFFF;
+    --ion-item-background: white;
+    --ion-item-color: black;
+
+    ion-menu {
+        --ion-item-background: var(--ion-background-color);
+        --ion-item-color: var(--ion-text-color);
+    }
 
     /** primary **/
     --ion-color-primary: #3880ff;
@@ -80,4 +88,7 @@
     --ion-color-light-tint: #f5f6f9;
 
     /** theming */
+}
+ion-card {
+    background-color: white;
 }

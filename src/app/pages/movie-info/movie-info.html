@@ -5,36 +5,39 @@
             <div class="vignette-top"></div>
             <div class="backdrop">
                 <img class="backdrop-image" [imageSwapper]="movie.backdropUrls" />
+                <div class="play-button-container">
+                    <div class="play-button" routerLink="/movies/{{movie.id}}/play">
+                        <ion-icon class="play-icon" name="play"></ion-icon>
+                        <div class="play-button-backdrop"></div>
+                    </div>
+                </div>
             </div>
             <div class="vignette-bottom"></div>
         </div>
         <h1 class="title">{{movie.title}}</h1>
         <div class="various-info" text-center>
+            <span inline-block v-center>
+                {{movie.releaseYear?movie.releaseYear: 'Release date unknown'}}
+            </span>
+            &bull;
             <span>
-                <ion-badge v-center>{{movie.rating ? movie.rating : 'Rating unknown'}}</ion-badge>
+                {{movie.rating ? movie.rating : 'Rating unknown'}}
             </span>
             &bull;
             <span>
                 {{movie.runtimeSeconds ? Math.ceil(movie.runtimeSeconds/60) + ' minutes' : 'Runtime unknown'}}
             </span>
-            &bull;
-            <span inline-block v-center>
-                {{movie.releaseYear?movie.releaseYear: 'Release date unknown'}}
-            </span>
         </div>
 
         <!--play button-->
         <div text-center>
-            <ng-container *ngIf="isInProgress">
-                <ion-button color="success" routerLink="/movies/{{movie.id}}/play">
-                    <ion-icon name="play"></ion-icon>&nbsp;Resume
-                </ion-button>
+            <!-- <ng-container *ngIf="isInProgress">
                 <ion-button color="medium" routerLink="/movies/{{movie.id}}/play" [queryParams]="{resumeSeconds: 0}">
                     <ion-icon name="refresh"></ion-icon>&nbsp;Start Over
                 </ion-button>
-            </ng-container>
+            </ng-container> -->
             <ng-container *ngIf="isInProgress === false">
-                <ion-button color="success" routerLink="/movies/{{movie.id}}/play">
+                <ion-button color="success">
                     <ion-icon name="play"></ion-icon>&nbsp;Watch Now
                 </ion-button>
             </ng-container>
