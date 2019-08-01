@@ -4,7 +4,7 @@
             <ion-menu-button class="menu-button" color="light" autoHide="false"></ion-menu-button>
             <div class="vignette-top"></div>
             <div class="backdrop">
-                <img class="backdrop-image" [imageSwapper]="movie.backdropUrls" />
+                <img class="backdrop-image" [imageSwapper]="[movie.backdropUrls[0]]" />
                 <div class="play-button-container">
                     <div class="play-button" routerLink="/movies/{{movie.id}}/play">
                         <ion-icon class="play-icon" name="play"></ion-icon>
@@ -27,20 +27,6 @@
             <span>
                 {{movie.runtimeSeconds ? Math.ceil(movie.runtimeSeconds/60) + ' minutes' : 'Runtime unknown'}}
             </span>
-        </div>
-
-        <!--play button-->
-        <div text-center>
-            <!-- <ng-container *ngIf="isInProgress">
-                <ion-button color="medium" routerLink="/movies/{{movie.id}}/play" [queryParams]="{resumeSeconds: 0}">
-                    <ion-icon name="refresh"></ion-icon>&nbsp;Start Over
-                </ion-button>
-            </ng-container> -->
-            <ng-container *ngIf="isInProgress === false">
-                <ion-button color="success">
-                    <ion-icon name="play"></ion-icon>&nbsp;Watch Now
-                </ion-button>
-            </ng-container>
         </div>
         <div padding>
             <p>{{movie.summary? movie.summary: 'No summary available'}}</p>
