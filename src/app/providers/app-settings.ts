@@ -41,4 +41,14 @@ export class AppSettings {
 
     public saveMediaProgressInterval = 2000;
 
+    /**
+     * The number of seconds the video should jump FORWARD when the user presses the jump-forward button on the player
+     */
+    public jumpForwardSeconds = 10;
+
+    /**
+     * The number of seconds the video should jump BACKWARD when the user presses the jump-backward button on the player
+     */
+    public jumpBackwardSeconds = 10;
+
 }

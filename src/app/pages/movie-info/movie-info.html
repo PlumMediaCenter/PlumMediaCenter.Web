@@ -6,10 +6,7 @@
             <div class="backdrop">
                 <img class="backdrop-image" [imageSwapper]="[movie.backdropUrls[0]]" />
                 <div class="play-button-container">
-                    <div class="play-button" routerLink="/movies/{{movie.id}}/play">
-                        <ion-icon class="play-icon" name="play"></ion-icon>
-                        <div class="play-button-backdrop"></div>
-                    </div>
+                    <play-button routerLink="/movies/{{movie.id}}/play"></play-button>
                 </div>
             </div>
             <div class="vignette-bottom"></div>

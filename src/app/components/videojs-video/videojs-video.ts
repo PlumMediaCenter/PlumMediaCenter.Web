@@ -18,12 +18,13 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
         private appSettings: AppSettings,
         private api: Api
     ) {
-        this.id = 'video_' + VideojsVideoComponent.indexCounter++;
+        this.videoPlayerId = 'video_' + VideojsVideoComponent.indexCounter++;
+        screen.orientation.lock('landscape');
     }
     /**
      * The html id for the video element
      */
-    public id: string;
+    public videoPlayerId: string;
 
     @Input()
     public mediaItemId: number;
@@ -56,10 +57,11 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
     private player;
 
     ngAfterViewInit() {
-        let element = document.getElementById(this.id);
+        let element = document.getElementById(this.videoPlayerId);
         this.player = videojs(element, {
             poster: this.poster,
             autoplay: this.autoplay,
+            controls: false,
             fluid: false
         }, () => {
             //seek to the playback seconds specified
@@ -68,8 +70,28 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
             }
             this.player.play();
             this.trackProgress();
+            this.player.el_.appendChild(
+                document.getElementById(`video-buttons-container-${this.videoPlayerId}`)
+            );
+            console.log(this.player);
+        });
+        this.isPaused = this.player.paused();
+        this.player.on(['pause', 'playing'], () => {
+            this.isPaused = this.player.paused();
+        });
+
+        this.player.on('timeupdate', () => {
+            this.currentTime = this.player.currentTime();
+            console.log('currentTime', this.currentTime);
         });
     }
+
+    /**
+     * The current number of seconds the video is at. Used exclusively for time tracker bar
+     */
+    public currentTime: number;
+
+    public isPaused: boolean;
 
     private progressIntervalHandler: any;
     private trackProgress() {
@@ -114,4 +136,20 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
         //stop updating the server with the media progress
         this.stopTrackProgress();
     }
+
+    play() {
+        this.player.play();
+    }
+
+    pause() {
+        this.player.pause();
+    }
+    jumpForward() {
+        this.player.currentTime(this.player.currentTime() + this.appSettings.jumpForwardSeconds);
+    }
+    jumpBackward() {
+        this.player.currentTime(this.player.currentTime() - this.appSettings.jumpBackwardSeconds);
+    }
+
+
 }

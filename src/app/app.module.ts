@@ -46,6 +46,7 @@ import { SearchInputComponent } from './components/search-input/search-input';
 import { AppSettings } from './providers/app-settings';
 import { MetadataCompareRowComponent } from './pages/movie-metadata/metadata-compare-row/metadata-compare-row';
 import { BackClickDirective } from './directives/back-click';
+import { PlayButtonComponent } from './components/play-button/play-button';
 
 @NgModule({
     declarations: [
@@ -64,14 +65,15 @@ import { BackClickDirective } from './directives/back-click';
         InitializePage,
 
         //components
+        ImageListComponent,
         MovieCardComponent,
         MetadataCompareRowComponent,
-        ImageListComponent,
+        PlayButtonComponent,
+        ProgressBarComponent,
         ProgressSparseComponent,
+        SearchInputComponent,
         StringListComponent,
         VideojsVideoComponent,
-        SearchInputComponent,
-        ProgressBarComponent,
 
         //directives
         DeviceSizeIfDirective,

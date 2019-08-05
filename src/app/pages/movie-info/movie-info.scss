@@ -44,54 +44,6 @@
     align-items: center;
 }
 
-.play-button {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    border: 4px solid white;
-    padding: 15px;
-    font-size: 3em;
-    cursor: pointer;
-    overflow: hidden;
-    position: relative;
-    box-shadow: 10px 14px 25px -2px rgba(0, 0, 0, 0.6);
-    position: relative;
-    z-index: 10000000000;
-    transition: box-shadow 100ms ease-in-out;
-    outline: none;
-
-    &:active {
-        box-shadow: 10px 14px 17px -2px rgba(0, 0, 0, 0.4);
-    }
-
-    &:hover {
-        .play-button-backdrop {
-            background-color: rgba(0, 0, 0, .5);
-        }
-    }
-}
-
-.play-icon {
-    z-index: 1;
-    position: relative;
-    left: 3px;
-}
-
-.play-button-backdrop {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    right: 0;
-    transition: background-color 150ms ease-in-out;
-    background-color: rgba(0, 0, 0, .3);
-    z-index: 0;
-}
-
-
-
 //hide the bottom vignette above certain screen size
 @media(min-width: 800px) {
     .vignette-bottom {
