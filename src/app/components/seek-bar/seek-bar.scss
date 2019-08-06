@@ -2,6 +2,25 @@
     display: block;
 }
 
+.container {
+    display: table;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.left {
+    display: table-cell;
+    width: 100%;
+}
+
+.right {
+    display: table-cell;
+    padding-left: 15px;
+    font-size: 1.5em;
+    position: relative;
+    top: 3px;
+}
+
 .slider {
     -webkit-appearance: none;
     width: 100%;

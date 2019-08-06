@@ -10,7 +10,7 @@
     </div>
     <div class="backdrop"></div>
     <div class="video-buttons">
-        <div class="flex-x flex-y" (click)="$event.stopPropagation()">
+        <div class="center-buttons flex-x flex-y" (click)="$event.stopPropagation()">
             <ion-icon name="refresh" flip-x (click)="jumpBackward()"></ion-icon>
             <ion-icon name="play" (click)="play()" [hidden]="!isPaused"></ion-icon>
             <ion-icon name="pause" (click)="pause()" [hidden]="isPaused"></ion-icon>

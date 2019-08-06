@@ -22,6 +22,7 @@ export class SeekBarComponent implements OnInit {
         if (value !== this._value) {
             this._value = value;
             this.adjustLeftWidth();
+            this.computeTimeRemaining();
         }
     }
     public get value() {
@@ -47,6 +48,23 @@ export class SeekBarComponent implements OnInit {
     }
 
     @ViewChild('input') inputElement: ElementRef<HTMLInputElement>;
+
+    public computeTimeRemaining() {
+        let totalSeconds = this.totalSeconds - this.value;
+        let hours = Math.floor(totalSeconds / 3600);
+        let minutes = Math.floor((totalSeconds - (hours * 3600)) / 60);
+        let seconds = Math.floor(totalSeconds - (hours * 3600) - (minutes * 60));
+
+        // round seconds
+        seconds = Math.round(seconds * 100) / 100;
+
+        let result = (hours < 10 ? '0' + hours : `${hours}`);
+        result += ':' + (minutes < 10 ? '0' + minutes : minutes);
+        result += ':' + (seconds < 10 ? '0' + seconds : seconds);
+        this.hoursMinutesSeconds = result;
+    }
+
+    public hoursMinutesSeconds = '00:00:00';
 
     onInput(event) {
         this.change.emit(this._value);

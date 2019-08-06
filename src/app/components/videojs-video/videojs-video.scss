@@ -50,12 +50,15 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    font-size: 5em;
     z-index: 11;
 
     ion-icon {
         margin: 40px;
         cursor: pointer;
+    }
+
+    .center-buttons {
+        font-size: 5em;
     }
 }
 
