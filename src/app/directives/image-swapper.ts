@@ -48,7 +48,7 @@ export class ImageSwapperDirective implements OnDestroy, OnInit {
         this.intervalHandle = setInterval(async () => {
             //if this component is currently visible, swap to next image
             if (this.el.nativeElement.offsetParent) {
-                console.log('next image');
+                // console.log('next image');
                 await this.nextImage();
             }
         }, this.imageSwapInterval);

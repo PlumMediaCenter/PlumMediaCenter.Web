@@ -9,7 +9,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, EnableMenuGuard, DisableMenuGuard } from './app-routing.module';
 
 import { HomePage } from './pages/home/home';
 import { MovieCardComponent } from './components/movie-card/movie-card';
@@ -47,6 +47,7 @@ import { AppSettings } from './providers/app-settings';
 import { MetadataCompareRowComponent } from './pages/movie-metadata/metadata-compare-row/metadata-compare-row';
 import { BackClickDirective } from './directives/back-click';
 import { PlayButtonComponent } from './components/play-button/play-button';
+import { SeekBarComponent } from './components/seek-bar/seek-bar';
 
 @NgModule({
     declarations: [
@@ -72,6 +73,7 @@ import { PlayButtonComponent } from './components/play-button/play-button';
         ProgressBarComponent,
         ProgressSparseComponent,
         SearchInputComponent,
+        SeekBarComponent,
         StringListComponent,
         VideojsVideoComponent,
 
@@ -109,6 +111,8 @@ import { PlayButtonComponent } from './components/play-button/play-button';
         HttpClientModule
     ],
     providers: [
+        EnableMenuGuard,
+        DisableMenuGuard,
         StatusBar,
         SplashScreen,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

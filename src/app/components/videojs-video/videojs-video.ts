@@ -54,7 +54,7 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
             this.player.currentTime(this._seconds);
         }
     }
-    private _seconds: number;
+    public _seconds: number;
 
     private player;
 
@@ -75,7 +75,7 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
             this.player.el_.appendChild(
                 document.getElementById(`video-buttons-container-${this.videoPlayerId}`)
             );
-            console.log(this.player);
+            console.log('Player', this.player);
         });
         this.isPaused = this.player.paused();
         this.player.on(['pause', 'playing'], () => {
@@ -83,8 +83,7 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
         });
 
         this.player.on('timeupdate', () => {
-            this.currentTime = this.player.currentTime();
-            // console.log('currentTime', this.currentTime);
+            this._seconds = this.player.currentTime();
         });
 
         this.player.on('useractive', () => {
@@ -94,18 +93,22 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
             this.isUserActive = false;
         });
         this.isUserActive = this.player.userActive();
+
+        this.player.on('loadeddata', (...args) => {
+            console.log('videodimensions', this.getVideoDimensions(document.getElementsByTagName('video')[0]));
+            this.totalSeconds = Math.ceil(this.player.duration());
+        });
     }
 
+    /**
+     * The total number of seconds duration of the current video
+     */
+    public totalSeconds = 0;
 
     /**
      * Is the user currently active? This is used to show/hide video controls
      */
     public isUserActive: boolean;
-
-    /**
-     * The current number of seconds the video is at. Used exclusively for time tracker bar
-     */
-    public currentTime: number;
 
     public isPaused: boolean;
 
@@ -159,13 +162,7 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
     }
 
     toggleControlVisibility() {
-        console.log('setting user active to ', !this.isUserActive);
         this.player.userActive(!this.isUserActive);
-        console.log('user active is now', this.player.userActive());
-    }
-
-    buttonsClick(event) {
-        console.log(arguments);
     }
 
     /**
@@ -174,7 +171,39 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
     public back() {
         this.location.back();
     }
-    
+
+    public getVideoDimensions(video) {
+        // Ratio of the video's intrisic dimensions
+        let videoRatio = video.videoWidth / video.videoHeight;
+        // The width and height of the video element
+        let width = video.offsetWidth;
+        let height = video.offsetHeight;
+        // The ratio of the element's width to its height
+        let elementRatio = width / height;
+        // If the video element is short and wide
+        if (elementRatio > videoRatio) {
+            width = height * videoRatio;
+            // It must be tall and thin, or exactly equal to the original ratio
+        } else {
+            height = width / videoRatio;
+        }
+        return {
+            width: width,
+            height: height
+        };
+    }
+
+    seekDragStart() {
+        this.pause();
+    }
+    seekDragStop() {
+        this.play();
+    }
+
+    seekChange(secondsFromSeekBar) {
+        this.seconds = parseInt(secondsFromSeekBar);
+    }
+
     ngOnDestroy() {
         //destroy the video player if it was created
         if (this.player) {

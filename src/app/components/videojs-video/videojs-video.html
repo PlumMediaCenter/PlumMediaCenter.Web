@@ -1,7 +1,8 @@
 <video *ngIf="url" id="{{videoPlayerId}}" class="video-js vjs-default-skin vjs-big-play-centered" preload="auto">
     <source [src]="url" type="video/mp4" />
 </video>
-<div id="video-buttons-container-{{videoPlayerId}}" class="video-buttons-container" [ngClass]="{hide: !isUserActive}" (click)="toggleControlVisibility()">
+<div id="video-buttons-container-{{videoPlayerId}}" class="video-buttons-container" [ngClass]="{hide: !isUserActive}"
+     (click)="toggleControlVisibility()">
     <div class="back-container">
         <ion-button color="light" fill="clear" (click)="back()">
             <ion-icon name="arrow-round-back"></ion-icon>
@@ -15,5 +16,11 @@
             <ion-icon name="pause" (click)="pause()" [hidden]="isPaused"></ion-icon>
             <ion-icon name="refresh" (click)="jumpForward()"></ion-icon>
         </div>
+        <seek-bar [totalSeconds]="totalSeconds"
+                  [value]="_seconds"
+                  (change)="seekChange($event)"
+                  (dragstart)="seekDragStart()"
+                  (dragstop)="seekDragStop()"
+                  (click)="$event.stopPropagation()"></seek-bar>
     </div>
 </div>

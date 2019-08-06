@@ -1,0 +1,2 @@
+<input #input class="slider" type="range" min="0" [max]="totalSeconds" [(ngModel)]="_value" (change)="$event.stopPropagation()"
+       (input)="onInput($event);" (mousedown)="dragstart.emit()" (mouseup)="dragstop.emit()" />

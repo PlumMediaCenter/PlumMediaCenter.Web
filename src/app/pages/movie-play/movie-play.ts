@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck, ElementRef } from '@angular/core';
+import { Component, OnInit, DoCheck, ElementRef, OnDestroy } from '@angular/core';
 import { Api } from '../../providers/api';
 import { Movie } from '../../interfaces/movie';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,13 +9,13 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrls: ['movie-play.scss']
 })
 export class MoviePlayPage implements OnInit, DoCheck {
-
     constructor(
         public api: Api,
         public activatedRoute: ActivatedRoute,
         private el: ElementRef,
         private router: Router
     ) {
+        console.log('disabling menu');
         //anytime the router changes, determine if we should show the video player. This is the best way I could
         //figure out how to stop playback when clicking the back button
         this.router.events.subscribe(evt => {

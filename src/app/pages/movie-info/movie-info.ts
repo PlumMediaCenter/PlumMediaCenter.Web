@@ -11,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['movie-info.scss']
 })
 export class MovieInfoPage implements OnInit {
-    public Math = Math;
     constructor(
         public activatedRoute: ActivatedRoute,
         public api: Api,
@@ -32,6 +31,9 @@ export class MovieInfoPage implements OnInit {
             throw e;
         });
     }
+
+    //give the template to the Math object
+    public Math = Math;
 
     //TODO re-implement this somehow
     ionViewDidEnter() {
