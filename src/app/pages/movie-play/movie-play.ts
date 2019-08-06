@@ -1,9 +1,7 @@
 import { Component, OnInit, DoCheck, ElementRef } from '@angular/core';
-import { NavParams } from '@ionic/angular';
 import { Api } from '../../providers/api';
 import { Movie } from '../../interfaces/movie';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
 
 @Component({
     selector: 'page-movie-play',
@@ -16,12 +14,11 @@ export class MoviePlayPage implements OnInit, DoCheck {
         public api: Api,
         public activatedRoute: ActivatedRoute,
         private el: ElementRef,
-        private location: Location,
         private router: Router
     ) {
         //anytime the router changes, determine if we should show the video player. This is the best way I could
         //figure out how to stop playback when clicking the back button
-        router.events.subscribe(evt => {
+        this.router.events.subscribe(evt => {
             this.ngDoCheck();
         });
     }
@@ -53,7 +50,4 @@ export class MoviePlayPage implements OnInit, DoCheck {
         this.movie = await this.api.movies.getById(this.movieId);
     }
 
-    public back() {
-        this.location.back();
-    }
 }

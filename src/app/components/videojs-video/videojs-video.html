@@ -1,12 +1,19 @@
 <video *ngIf="url" id="{{videoPlayerId}}" class="video-js vjs-default-skin vjs-big-play-centered" preload="auto">
     <source [src]="url" type="video/mp4" />
 </video>
-<div id="video-buttons-container-{{videoPlayerId}}" class="video-buttons-container">
+<div id="video-buttons-container-{{videoPlayerId}}" class="video-buttons-container" [ngClass]="{hide: !isUserActive}" (click)="toggleControlVisibility()">
+    <div class="back-container">
+        <ion-button color="light" fill="clear" (click)="back()">
+            <ion-icon name="arrow-round-back"></ion-icon>
+        </ion-button>
+    </div>
     <div class="backdrop"></div>
     <div class="video-buttons">
-        <ion-icon name="refresh" flip-x (click)="jumpBackward()"></ion-icon>
-        <ion-icon name="play" (click)="play()" [hidden]="!isPaused"></ion-icon>
-        <ion-icon name="pause" (click)="pause()" [hidden]="isPaused"></ion-icon>
-        <ion-icon name="refresh" (click)="jumpForward()"></ion-icon>
+        <div class="flex-x flex-y" (click)="$event.stopPropagation()">
+            <ion-icon name="refresh" flip-x (click)="jumpBackward()"></ion-icon>
+            <ion-icon name="play" (click)="play()" [hidden]="!isPaused"></ion-icon>
+            <ion-icon name="pause" (click)="pause()" [hidden]="isPaused"></ion-icon>
+            <ion-icon name="refresh" (click)="jumpForward()"></ion-icon>
+        </div>
     </div>
 </div>

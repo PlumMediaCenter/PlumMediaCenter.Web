@@ -22,8 +22,9 @@
     }
 }
 
-.backdrop {
+.video-backdrop {
     position: relative;
+    z-index: 0;
     width: 100%;
     max-width: 800px;
     margin: auto;
@@ -60,11 +61,11 @@
 
 
 
-.backdrop-image {
+.video-backdrop-image {
     z-index: 1;
 }
 
-.backdrop-container {
+.video-backdrop-container {
     position: relative;
     width: 100%;
 }

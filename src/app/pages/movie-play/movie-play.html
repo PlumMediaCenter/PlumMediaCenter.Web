@@ -1,9 +1,4 @@
 <ion-content>
-    <div class="back-container">
-        <ion-button color="light" fill="clear" (click)="back()">
-            <ion-icon name="arrow-round-back"></ion-icon>
-        </ion-button>
-    </div>
     <ng-container *ngIf="movie && isVideoVisible">
         <videojs-video full [mediaItemId]="movie.id" [url]="movie.videoUrl" [poster]="movie.backdropUrls[0]"
             [autoplay]="true" [seconds]="resumeSeconds"></videojs-video>

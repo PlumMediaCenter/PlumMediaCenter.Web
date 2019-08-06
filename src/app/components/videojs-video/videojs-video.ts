@@ -2,6 +2,7 @@ import { Component, Input, AfterViewInit, OnDestroy, ViewEncapsulation } from '@
 import videojs from 'video.js';
 import { AppSettings } from '../../providers/app-settings';
 import { Api } from '../../providers/api';
+import { Location } from '@angular/common';
 
 @Component({
     selector: 'videojs-video',
@@ -16,6 +17,7 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
     private static indexCounter = 1;
     constructor(
         private appSettings: AppSettings,
+        private location: Location,
         private api: Api
     ) {
         this.videoPlayerId = 'video_' + VideojsVideoComponent.indexCounter++;
@@ -82,9 +84,23 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
 
         this.player.on('timeupdate', () => {
             this.currentTime = this.player.currentTime();
-            console.log('currentTime', this.currentTime);
+            // console.log('currentTime', this.currentTime);
         });
+
+        this.player.on('useractive', () => {
+            this.isUserActive = true;
+        });
+        this.player.on('userinactive', () => {
+            this.isUserActive = false;
+        });
+        this.isUserActive = this.player.userActive();
     }
+
+
+    /**
+     * Is the user currently active? This is used to show/hide video controls
+     */
+    public isUserActive: boolean;
 
     /**
      * The current number of seconds the video is at. Used exclusively for time tracker bar
@@ -128,15 +144,6 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
         this.progressIntervalHandler = undefined;
     }
 
-    ngOnDestroy() {
-        //destroy the video player if it was created
-        if (this.player) {
-            this.player.dispose();
-        }
-        //stop updating the server with the media progress
-        this.stopTrackProgress();
-    }
-
     play() {
         this.player.play();
     }
@@ -151,5 +158,29 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
         this.player.currentTime(this.player.currentTime() - this.appSettings.jumpBackwardSeconds);
     }
 
+    toggleControlVisibility() {
+        console.log('setting user active to ', !this.isUserActive);
+        this.player.userActive(!this.isUserActive);
+        console.log('user active is now', this.player.userActive());
+    }
 
+    buttonsClick(event) {
+        console.log(arguments);
+    }
+
+    /**
+     * Navigate backwards in history once.
+     */
+    public back() {
+        this.location.back();
+    }
+    
+    ngOnDestroy() {
+        //destroy the video player if it was created
+        if (this.player) {
+            this.player.dispose();
+        }
+        //stop updating the server with the media progress
+        this.stopTrackProgress();
+    }
 }

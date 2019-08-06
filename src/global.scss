@@ -185,3 +185,13 @@ movie-card .poster {
     filter: FlipH;
     -ms-filter: "FlipH";
 }
+
+.flex-x {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-y {
+    display: flex;
+    align-items: center;
+}

@@ -1,10 +1,10 @@
 <ion-content relative fill>
     <div *ngIf="movie" max-width full-height>
-        <div class="backdrop-container">
+        <div class="video-backdrop-container">
             <ion-menu-button class="menu-button" color="light" autoHide="false"></ion-menu-button>
             <div class="vignette-top"></div>
-            <div class="backdrop">
-                <img class="backdrop-image" [imageSwapper]="[movie.backdropUrls[0]]" />
+            <div class="video-backdrop">
+                <img class="video-backdrop-image" [imageSwapper]="[movie.backdropUrls[0]]" />
                 <div class="play-button-container">
                     <play-button routerLink="/movies/{{movie.id}}/play"></play-button>
                 </div>
