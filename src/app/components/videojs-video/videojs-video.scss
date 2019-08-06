@@ -54,7 +54,7 @@
     z-index: 11;
 
     ion-icon {
-        margin: 20px;
+        margin: 40px;
         cursor: pointer;
     }
 }
@@ -79,5 +79,7 @@ seek-bar {
     position: absolute;
     bottom: 0px;
     margin-bottom: 40px;
-    width: 100%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }

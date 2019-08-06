@@ -58,6 +58,8 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
 
     private player;
 
+    private defaultInactivityTimeout: number;
+
     ngAfterViewInit() {
         let element = document.getElementById(this.videoPlayerId);
         this.player = videojs(element, {
@@ -70,7 +72,9 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
             if (this._seconds) {
                 this.player.currentTime(this._seconds);
             }
+            (window as any)._player = this.player;
             this.player.play();
+            this.defaultInactivityTimeout = this.player.options_.inactivityTimeout;
             this.trackProgress();
             this.player.el_.appendChild(
                 document.getElementById(`video-buttons-container-${this.videoPlayerId}`)
@@ -194,9 +198,12 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
     }
 
     seekDragStart() {
+        //force the controls to show for as long as the seeking is happening
+        this.player.options_.inactivityTimeout = 0;
         this.pause();
     }
     seekDragStop() {
+        this.player.options_.inactivityTimeout = this.defaultInactivityTimeout;
         this.play();
     }
 
