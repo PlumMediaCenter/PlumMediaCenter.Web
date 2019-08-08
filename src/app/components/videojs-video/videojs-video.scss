@@ -101,3 +101,7 @@
     position: relative;
     top: 7px;
 }
+
+.fullscreen-button:focus {
+    outline: none;
+}
