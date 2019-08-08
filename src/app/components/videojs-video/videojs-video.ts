@@ -17,7 +17,7 @@ import { Util } from '../../providers/util';
 export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
     private static indexCounter = 1;
     constructor(
-        private appSettings: AppSettings,
+        public appSettings: AppSettings,
         private location: Location,
         private api: Api,
         private util: Util

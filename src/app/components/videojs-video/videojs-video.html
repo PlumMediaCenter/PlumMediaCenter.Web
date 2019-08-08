@@ -11,19 +11,26 @@
     <div class="backdrop"></div>
     <div class="video-buttons">
         <div class="center-buttons flex-x flex-y" (click)="$event.stopPropagation()">
-            <ion-icon name="refresh" flip-x (click)="jumpBackward()"></ion-icon>
-            <ion-icon name="play" (click)="play()" [hidden]="!isPaused"></ion-icon>
-            <ion-icon name="pause" (click)="pause()" [hidden]="isPaused"></ion-icon>
-            <ion-icon name="refresh" (click)="jumpForward()"></ion-icon>
+            <span relative>
+                <span class="jump-seconds-left">{{appSettings.jumpBackwardSeconds}}</span>
+                <ion-icon name="refresh" flip-x (click)="jumpBackward()"></ion-icon>
+            </span>
+            <span relative>
+                <ion-icon name="play" (click)="play()" [hidden]="!isPaused"></ion-icon>
+                <ion-icon name="pause" (click)="pause()" [hidden]="isPaused"></ion-icon>
+            </span>
+            <span relative>
+                <span class="jump-seconds-right">{{appSettings.jumpBackwardSeconds}}</span>
+                <ion-icon name="refresh" (click)="jumpForward()"></ion-icon>
+            </span>
         </div>
-        <div class="bottom-controls"(click)="$event.stopPropagation()">
+        <div class="bottom-controls" (click)="$event.stopPropagation()">
             <div class="left">
                 <seek-bar [totalSeconds]="totalSeconds"
                           [value]="_seconds"
                           (change)="seekChange($event)"
                           (dragstart)="seekDragStart()"
-                          (dragstop)="seekDragStop()"
-                          ></seek-bar>
+                          (dragstop)="seekDragStop()"></seek-bar>
             </div>
             <div class="right">
                 <button class="fullscreen-button" (click)="toggleFullScreen()">
