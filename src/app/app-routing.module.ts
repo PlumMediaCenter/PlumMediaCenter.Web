@@ -1,5 +1,5 @@
 import { NgModule, Injectable } from '@angular/core';
-import { Routes, RouterModule, CanActivate } from '@angular/router';
+import { Routes, RouterModule, CanActivate, CanDeactivate } from '@angular/router';
 import { HomePage } from './pages/home/home';
 import { SourcesPage } from './pages/sources/sources';
 import { MovieInfoPage } from './pages/movie-info/movie-info';
@@ -11,14 +11,13 @@ import { MoviePlayPage } from './pages/movie-play/movie-play';
 import { MenuController } from '@ionic/angular';
 
 @Injectable()
-export class EnableMenuGuard implements CanActivate {
+export class EnableMenuGuard implements CanDeactivate<any> {
     constructor(
         private menuController: MenuController) {
     }
 
-    canActivate() {
-        console.log('enabling menu');
-        this.menuController.enable(false);
+    canDeactivate() {
+        this.menuController.enable(true);
         return true;
     }
 }
@@ -30,7 +29,6 @@ export class DisableMenuGuard implements CanActivate {
     }
 
     canActivate() {
-        console.log('disabling menu');
         this.menuController.enable(false);
         return true;
     }
