@@ -45,4 +45,30 @@ export class Util {
             }, timeMilliseconds);
         });
     }
+
+    lockOrientation(orientations: OrientationLockType[]) {
+        let screen = (window.screen as any);
+        screen.lockOrientation = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation || screen.orientation.lock;
+        if (screen && screen.orientation && screen.orientation.lock) {
+            if (screen.orientation.lock(orientations)) {
+                // Orientation was locked
+                console.log('Locked screen orientation to [' + orientations.join(',') + ']');
+            } else {
+                // Orientation lock failed
+                console.log('Unable to lock screen orientiation: lock failed for unknown reason');
+            }
+        } else {
+            console.log('Unable to lock screen orientation: not supported in this browser');
+        }
+    }
+
+    unlockOrientation() {
+        let screen = (window.screen as any);
+        let orientation = screen.msOrientation || screen.mozOrientation || screen.orientation;
+        if (orientation) {
+            orientation.unlock();
+        } else {
+            console.log('Unable to unlock screen orientiation: not supported in this browser');
+        }
+    }
 }

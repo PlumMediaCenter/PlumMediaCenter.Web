@@ -51,14 +51,14 @@
     align-items: center;
     width: 100%;
     z-index: 11;
+}
+
+.center-buttons {
+    font-size: 5em;
 
     ion-icon {
         margin: 40px;
         cursor: pointer;
-    }
-
-    .center-buttons {
-        font-size: 5em;
     }
 }
 
@@ -78,11 +78,26 @@
     z-index: 30;
 }
 
-seek-bar {
+.bottom-controls {
     position: absolute;
     bottom: 0px;
     margin-bottom: 40px;
     width: 90%;
+    display: table;
+    box-sizing: border-box;
     margin-left: auto;
     margin-right: auto;
+}
+
+.left {
+    display: table-cell;
+    width: 100%;
+}
+
+.right {
+    display: table-cell;
+    padding-left: 15px;
+    font-size: 2em;
+    position: relative;
+    top: 7px;
 }

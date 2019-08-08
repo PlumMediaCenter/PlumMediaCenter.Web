@@ -16,11 +16,20 @@
             <ion-icon name="pause" (click)="pause()" [hidden]="isPaused"></ion-icon>
             <ion-icon name="refresh" (click)="jumpForward()"></ion-icon>
         </div>
-        <seek-bar [totalSeconds]="totalSeconds"
-                  [value]="_seconds"
-                  (change)="seekChange($event)"
-                  (dragstart)="seekDragStart()"
-                  (dragstop)="seekDragStop()"
-                  (click)="$event.stopPropagation()"></seek-bar>
+        <div class="bottom-controls">
+            <div class="left">
+                <seek-bar [totalSeconds]="totalSeconds"
+                          [value]="_seconds"
+                          (change)="seekChange($event)"
+                          (dragstart)="seekDragStart()"
+                          (dragstop)="seekDragStop()"
+                          (click)="$event.stopPropagation()"></seek-bar>
+            </div>
+            <div class="right">
+                <button (click)="toggleFullScreen()">
+                    <ion-icon name="expand"></ion-icon>
+                </button>
+            </div>
+        </div>
     </div>
 </div>

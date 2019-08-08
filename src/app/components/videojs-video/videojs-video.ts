@@ -3,6 +3,7 @@ import videojs from 'video.js';
 import { AppSettings } from '../../providers/app-settings';
 import { Api } from '../../providers/api';
 import { Location } from '@angular/common';
+import { Util } from '../../providers/util';
 
 @Component({
     selector: 'videojs-video',
@@ -18,7 +19,8 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
     constructor(
         private appSettings: AppSettings,
         private location: Location,
-        private api: Api
+        private api: Api,
+        private util: Util
     ) {
         this.videoPlayerId = 'video_' + VideojsVideoComponent.indexCounter++;
         screen.orientation.lock('landscape');
@@ -209,6 +211,16 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
 
     seekChange(secondsFromSeekBar) {
         this.seconds = parseInt(secondsFromSeekBar);
+    }
+
+    toggleFullScreen() {
+        if (this.player.isFullscreen()) {
+            this.player.exitFullscreen();
+            this.util.unlockOrientation();
+        } else {
+            this.player.requestFullscreen();
+            this.util.lockOrientation(['landscape']);
+        }
     }
 
     ngOnDestroy() {
