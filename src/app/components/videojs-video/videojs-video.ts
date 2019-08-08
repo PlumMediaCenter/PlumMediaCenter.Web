@@ -68,7 +68,8 @@ export class VideojsVideoComponent implements AfterViewInit, OnDestroy {
             poster: this.poster,
             autoplay: this.autoplay,
             controls: false,
-            fluid: false
+            fluid: false,
+            inactivityTimeout: 6000
         }, () => {
             //seek to the playback seconds specified
             if (this._seconds) {
