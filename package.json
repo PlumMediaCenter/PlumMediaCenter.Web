@@ -11,7 +11,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-prod": "ng build --prod",
-    "copy-to-prod": "copyup \"dist/**/*\" \"//192.168.1.8/dotnet/pmc/wwwroot/\" ",
+    "copy-to-prod": "copyfiles \"www/**/*\" \"//pi-server/www/pmc/wwwroot/\" -u 1",
     "publish": "npm run build-prod && npm run copy-to-prod"
   },
   "private": true,
@@ -46,6 +46,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~10.12.0",
     "codelyzer": "~4.5.0",
+    "copyfiles": "^2.1.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^4.1.0",
