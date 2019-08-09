@@ -9,6 +9,7 @@ import { HistoryPage } from './pages/history/history';
 import { AdminPage } from './pages/admin/admin';
 import { MoviePlayPage } from './pages/movie-play/movie-play';
 import { MenuController } from '@ionic/angular';
+import { SetupPage } from './pages/setup/setup';
 
 @Injectable()
 export class EnableMenuGuard implements CanDeactivate<any> {
@@ -38,12 +39,14 @@ export class DisableMenuGuard implements CanActivate {
 const routes: Routes = [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomePage },
+    { path: 'setup', component: SetupPage },
     { path: 'account', component: AccountPage },
     { path: 'admin', component: AdminPage },
     { path: 'sources', component: SourcesPage },
     { path: 'history', component: HistoryPage },
     { path: 'movies/:id', component: MovieInfoPage },
     { path: 'movies/:id/metadata', component: MovieMetadataPage },
+    { path: 'movies/:id/history', component: HistoryPage },
     { path: 'movies/:id/play', component: MoviePlayPage, canActivate: [DisableMenuGuard], canDeactivate: [EnableMenuGuard] },
 ];
 

@@ -117,10 +117,10 @@ export class Api {
         /**
          * Get history records for all media items
          */
-        getAllHistory: async (limit?: number, index?: number) => {
+        getAllHistory: async (mediaItemIds: number[], limit?: number, index?: number) => {
             return this.http2.graphqlRequest<MediaItemHistoryRecord[]>(`
-                query GetMediaHistory {
-                    mediaHistory {
+                query GetMediaHistory($mediaItemIds: [Int]!) {
+                    mediaHistory(mediaItemIds: $mediaItemIds) {
                         mediaType
                         posterUrl
                         title
@@ -135,7 +135,11 @@ export class Api {
                         dateEnd
                     }
                 }
-            `, { /*index, limit*/ }, 'GET', 'mediaHistory');
+            `, {
+                    mediaItemIds: mediaItemIds,
+                    // index: index,
+                    // limit: limit
+                }, 'GET', 'mediaHistory');
         },
         /**
          * Delete a history record by its id

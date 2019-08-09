@@ -49,6 +49,9 @@ export class ProgressSparseComponent {
     }
     private _upper: number;
 
+    //TODO - this was added to resolve compile errors, but is not used anywhere
+    public showLowerUpper: any;
+
     @Input()
     public unit?: string;
 

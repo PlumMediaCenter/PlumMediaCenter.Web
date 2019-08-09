@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Api } from '../../providers/api';
 import { Loader } from '../../providers/loader';
 import { Alerter } from '../../providers/alerter';
-import { InstallDatabasePage } from '../install-database/install-database';
+import { SetupPage } from '../setup/setup';
 import { HomePage } from '../home/home';
 
 @Component({

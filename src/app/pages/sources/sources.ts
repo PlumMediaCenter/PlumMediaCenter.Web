@@ -6,6 +6,7 @@ import { Toaster } from '../../providers/toaster';
 import { AdminPage } from '../admin/admin';
 import { MediaType } from '../../interfaces/media-type';
 import { Source } from '../../interfaces/source';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'page-sources',
@@ -18,7 +19,8 @@ export class SourcesPage {
         public api: Api,
         public alerter: Alerter,
         public loader: Loader,
-        public toaster: Toaster
+        public toaster: Toaster,
+        public router: Router
     ) {
         this.init();
     }
@@ -49,14 +51,16 @@ export class SourcesPage {
             await libgenPromise;
             await hideLibgen();
             //go back to the previous page
+            this.router.navigateByUrl('/admin');
             //TODO this.navCtrl.setRoot(AdminPage);
         } catch (e) {
             await hideSave();
             await hideLibgen();
             this.alerter.alert('There was an error saving sources: ' + e.message);
         }
-
     }
 
-
+    public addSource() {
+        this.sources.push(<any>{});
+    }
 }

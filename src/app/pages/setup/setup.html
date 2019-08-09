@@ -6,8 +6,9 @@
 
 <ion-content padding>
     <form style="max-width:700px;margin:auto;" (ngSubmit)="install()">
-        <p>In order for you to use this application, PlumMediaCenter must have its own schema in a mysql database running on
-            the same server at localhost.
+        <p>
+            In order for you to use this application, PlumMediaCenter must have its own schema in a mysql database
+            running on the same server at localhost.
         </p>
         <ion-item>
             <ion-label floating>Root mysql username</ion-label>
@@ -19,7 +20,7 @@
             <ion-input type="password" [(ngModel)]="rootPassword" name="rootPassword"></ion-input>
         </ion-item>
         <div text-center>
-            <button ion-button type="submit">Install</button>
+            <ion-button type="submit">Install</ion-button>
         </div>
     </form>
 </ion-content>

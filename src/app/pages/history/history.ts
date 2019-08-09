@@ -4,6 +4,7 @@ import { Alerter } from '../../providers/alerter';
 import { AppSettings } from '../../providers/app-settings';
 import { MediaItemHistoryRecord } from '../../interfaces/media-item-history-record';
 import { Loader } from '../../providers/loader';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'page-history',
@@ -15,7 +16,8 @@ export class HistoryPage implements OnInit {
         public api: Api,
         public appSettings: AppSettings,
         private alerter: Alerter,
-        private loader: Loader
+        private loader: Loader,
+        public activatedRoute: ActivatedRoute
     ) {
     }
     public Math = Math;
@@ -35,7 +37,13 @@ export class HistoryPage implements OnInit {
     public historyRecords: MediaItemHistoryRecord[];
 
     public async loadMore() {
-        let more = await this.api.mediaItems.getAllHistory(this.size, this.index);
+        let more: MediaItemHistoryRecord[];
+        let mediaItemId = this.activatedRoute.snapshot.queryParams.id;
+        if (mediaItemId) {
+            more = await this.api.mediaItems.getAllHistory([mediaItemId], this.size, this.index);
+        } else {
+            more = await this.api.mediaItems.getAllHistory(null, this.size, this.index);
+        }
         //calculate some numbers for each item
         for (let i = 0; i < more.length; i++) {
             let record = more[i];

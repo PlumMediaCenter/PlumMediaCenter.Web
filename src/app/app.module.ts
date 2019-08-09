@@ -30,7 +30,7 @@ import { SourcesPage } from './pages/sources/sources';
 import { Alerter } from './providers/alerter';
 import { Loader } from './providers/loader';
 import { Toaster } from './providers/toaster';
-import { InstallDatabasePage } from './pages/install-database/install-database';
+import { SetupPage } from './pages/setup/setup';
 import { InitializePage } from './pages/initialize/initialize';
 import { Util } from './providers/util';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar';
@@ -62,7 +62,7 @@ import { SeekBarComponent } from './components/seek-bar/seek-bar';
         MoviePlayPage,
         SearchResultsPage,
         SourcesPage,
-        InstallDatabasePage,
+        SetupPage,
         InitializePage,
 
         //components
@@ -100,7 +100,7 @@ import { SeekBarComponent } from './components/seek-bar/seek-bar';
         MoviePlayPage,
         SearchResultsPage,
         SourcesPage,
-        InstallDatabasePage,
+        SetupPage,
         InitializePage
     ],
     imports: [
