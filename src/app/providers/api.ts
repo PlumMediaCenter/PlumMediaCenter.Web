@@ -24,7 +24,7 @@ export class Api {
             {
                 movies {
                     id
-                    posterUrls
+                    posterUrls(width: 200)
                 }
             }`, null, 'GET', 'movies');
         },
